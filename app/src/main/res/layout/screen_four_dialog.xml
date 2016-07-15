@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        android:id="@+id/lblDialogRemove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:customFont="CarterOne.ttf"
+        android:text="Do you really want to remove this recipe from favorites?"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="18sp"
+        android:padding="@dimen/activity_horizontal_margin_half"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/background_brown_9"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/lblDialogRemove"
+        android:layout_toLeftOf="@+id/separator"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/IconExit"/>
+
+    <android.support.v4.widget.Space
+        android:id="@+id/separator"
+        android:layout_centerHorizontal="true"
+        android:layout_width="50dp"
+        android:layout_height="8dp"
+        android:layout_below="@+id/lblDialogRemove"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/lblDialogRemove"
+        android:layout_toRightOf="@+id/separator"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/CheckMarkGreen"/>
+
+</RelativeLayout>

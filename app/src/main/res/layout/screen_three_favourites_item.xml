@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgRecipeImage"
+        android:layout_width="230dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/recipeItemTitle"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/background_brown"
+        android:src="@drawable/BurgerPicture"
+        android:layout_height="225dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"/>
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        android:id="@+id/recipeItemTitle"
+        android:layout_width="250dp"
+        android:layout_height="65dp"
+        android:padding="@dimen/activity_horizontal_margin_half"
+        android:text="Tomato is an essential ingredient in most dishes"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:background="@drawable/ParchmentTitleDark"
+        android:maxWidth="250dp"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="-35dp"
+        android:layout_below="@+id/imgRecipeImage"
+        android:layout_marginLeft="-45dp"
+        android:layout_toRightOf="@+id/imgRecipeImage"
+        android:background="@drawable/IconExit"/>
+
+
+</RelativeLayout>

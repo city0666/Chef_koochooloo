@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="round_button_style" parent="AppTheme">
+        <item name="android:background">@drawable/dummy</item>
+        <item name="android:layout_width">@dimen/round_button_width_and_height</item>
+        <item name="android:layout_margin">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_height">@dimen/round_button_width_and_height</item>
+    </style>
+
+</resources>
