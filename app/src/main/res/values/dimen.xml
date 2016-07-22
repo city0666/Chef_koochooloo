@@ -6,6 +6,6 @@
 
 
     <!--dummy values and should be removed-->
-    <dimen name="round_button_width_and_height">65dp</dimen>
+    <dimen name="round_button_width_and_height">56dp</dimen>
 
 </resources>

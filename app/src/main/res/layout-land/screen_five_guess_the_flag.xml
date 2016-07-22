@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_clouds"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/topHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/imgBtnBack"
+        android:layout_below="@+id/imgBtnGlobe"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".7"
+            android:orientation="horizontal"
+            android:src="@drawable/chef_character_see_through_background" />
+
+        <android.support.v7.widget.GridLayout
+            android:id="@+id/ltOptionsHolder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:columnCount="2"
+            app:orientation="horizontal"
+            app:rowCount="2">
+
+            <ImageView
+                android:background="@drawable/picture_frame_small_75_68"
+                android:scaleType="center"
+                android:src="@drawable/check_mark_green"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="0"
+                app:layout_rowWeight="1" />
+
+            <ImageView
+                android:background="@drawable/picture_frame_small_75_68"
+                android:scaleType="center"
+                android:src="@drawable/check_mark_green"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="0"
+                app:layout_rowWeight="1" />
+
+            <ImageView
+                android:background="@drawable/picture_frame_small_75_68"
+                android:scaleType="center"
+                android:src="@drawable/check_mark_green"
+                app:layout_column="0"
+                app:layout_columnWeight="1"
+                app:layout_row="1"
+                app:layout_rowWeight="1" />
+
+            <ImageView
+                android:background="@drawable/picture_frame_small_75_68"
+                android:scaleType="center"
+                android:src="@drawable/check_mark_green"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                app:layout_row="1"
+                app:layout_rowWeight="1" />
+
+
+        </android.support.v7.widget.GridLayout>
+
+
+    </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/imgBtnGlobe"
+        style="@style/round_button_style.top"
+        android:background="@drawable/icon_globe" />
+
+    <ImageButton
+        android:id="@+id/imgBtnSound"
+        style="@style/round_button_style.top"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/done_button" />
+
+    <ImageButton
+        android:id="@+id/imgBtnBack"
+        style="@style/round_button_style.bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/left_arrow" />
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/topHolder"
+        android:layout_toLeftOf="@+id/imgBtnSound"
+        android:layout_toRightOf="@+id/imgBtnGlobe"
+        android:background="@drawable/speach_bubble"
+        android:gravity="center"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="Do you know which of these flags belongs to Switzerland?"
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+
+    <ImageButton
+        android:id="@+id/imgBtnForward"
+        style="@style/round_button_style.bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/right_arrow" />
+
+
+</RelativeLayout>

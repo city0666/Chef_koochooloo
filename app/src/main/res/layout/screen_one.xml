@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/BackgroundClouds"
+    android:background="@drawable/background_clouds"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
-    <ImageButton style="@style/round_button_style"
+    <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnGlobe"
-        android:background="@drawable/IconGlobe"/>
+        android:background="@drawable/icon_globe"/>
 
     <TextView
         android:text="SWITZERLAND"
@@ -22,15 +22,13 @@
         android:layout_toEndOf="@+id/imgBtnGlobe"
         android:layout_marginTop="@dimen/activity_horizontal_margin" />
 
-
-    <ImageButton style="@style/round_button_style"
+    <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnSound"
-        android:background="@drawable/DoneButton"
+        android:background="@drawable/done_button"
         android:layout_alignParentRight="true"/>
 
-
     <ImageView
-        android:background="@drawable/PictureFrame"
+        android:background="@drawable/picture_frame"
         android:src="@drawable/swiss"
         android:scaleType="fitXY"
         android:padding="25dp"
@@ -41,15 +39,13 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_above="@+id/imgBottomLeft"/>
 
-
-    <ImageButton style="@style/round_button_style"
-        android:background="@drawable/LeftArrow"
+    <ImageButton style="@style/round_button_style.bottom"
+        android:background="@drawable/left_arrow"
         android:id="@+id/imgBottomLeft"
         android:layout_alignParentBottom="true"/>
 
-
-    <ImageButton style="@style/round_button_style"
-        android:background="@drawable/RightArrow"
+    <ImageButton style="@style/round_button_style.bottom"
+        android:background="@drawable/right_arrow"
         android:id="@+id/imgBottomRight"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
@@ -65,7 +61,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_toRightOf="@+id/imgBottomLeft"
         android:layout_toLeftOf="@+id/imgBottomRight"
-        android:background="@drawable/BackgroundWide"
+        android:background="@drawable/bcakground_wide"
         android:textColor="#464545"
         android:maxHeight="50dp"
         android:paddingTop="20dp"

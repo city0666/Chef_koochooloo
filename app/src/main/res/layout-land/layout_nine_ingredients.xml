@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_clouds"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <ImageButton style="@style/round_button_style.top"
+        android:id="@+id/imgBtnGlobe"
+        android:background="@drawable/icon_globe"/>
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        android:text="SWISS OATS"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgBtnGlobe"
+        android:layout_toRightOf="@+id/imgBtnGlobe"
+        android:layout_toEndOf="@+id/imgBtnGlobe"
+        android:layout_marginTop="@dimen/activity_horizontal_margin" />
+
+    <ImageButton style="@style/round_button_style.top"
+        android:id="@+id/imgBtnSound"
+        android:background="@drawable/done_button"
+        android:layout_alignParentRight="true"/>
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/imgBottomLeft"
+        android:layout_below="@+id/imgBtnGlobe"
+        app:columnCount="2"
+        app:rowCount="1"
+        app:orientation="horizontal">
+
+
+        <FrameLayout
+            app:layout_row="0"
+            android:background="@drawable/background_brown_9"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+        </FrameLayout>
+
+
+
+        <FrameLayout
+            app:layout_columnWeight="1"
+            android:background="@drawable/picture_frame_small_75_68"
+            app:layout_row="0"
+            app:layout_column="1"
+            app:layout_rowWeight="1">
+
+        </FrameLayout>
+
+
+    </android.support.v7.widget.GridLayout>
+
+    <ImageButton style="@style/round_button_style.bottom"
+        android:background="@drawable/left_arrow"
+        android:id="@+id/imgBottomLeft"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageButton style="@style/round_button_style.bottom"
+        android:background="@drawable/right_arrow"
+        android:id="@+id/imgBottomRight"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        app:customFont="font.ttf"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_toRightOf="@+id/imgBottomLeft"
+        android:layout_toLeftOf="@+id/imgBottomRight"
+        android:background="@drawable/bcakground_wide"
+        android:textColor="#464545"
+        android:maxHeight="50dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin_half"
+        android:paddingRight="@dimen/activity_horizontal_margin_half"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:text="Did you know that Swiss consumes the most honey in the world? Almost 75 tons per person per year, that is more than the matterhorn weights alltogether. Also there are no koolos in the country due to visa restrictions."
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

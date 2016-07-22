@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/customListHolder"
+    android:minWidth="250dp"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:background="@drawable/background_brown_9"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <ScrollView
+        style="@style/scrollbar_shape_style"
+        android:layout_width="wrap_content"
+        android:minWidth="250dp"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:id="@+id/ltCustonListItemsHolder"
+            android:layout_width="wrap_content"
+            android:minWidth="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <ImageButton
+        android:id="@+id/imgBtnCustomListClose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/icon_exit"
+        android:layout_toRightOf="@+id/scrollView"
+        android:layout_marginLeft="-20dp"/>
+
+
+</RelativeLayout>

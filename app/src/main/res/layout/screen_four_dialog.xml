@@ -25,7 +25,7 @@
         android:layout_below="@+id/lblDialogRemove"
         android:layout_toLeftOf="@+id/separator"
         android:layout_marginTop="-30dp"
-        android:background="@drawable/IconExit"/>
+        android:background="@drawable/icon_exit"/>
 
     <android.support.v4.widget.Space
         android:id="@+id/separator"
@@ -40,6 +40,6 @@
         android:layout_below="@+id/lblDialogRemove"
         android:layout_toRightOf="@+id/separator"
         android:layout_marginTop="-30dp"
-        android:background="@drawable/CheckMarkGreen"/>
+        android:background="@drawable/check_mark_green"/>
 
 </RelativeLayout>

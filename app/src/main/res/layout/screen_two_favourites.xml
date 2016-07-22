@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:background="@drawable/BackgroundClouds"
+<RelativeLayout android:background="@drawable/background_clouds"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -7,9 +7,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <ImageButton style="@style/round_button_style"
+    <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnGlobe"
-        android:background="@drawable/IconGlobe"/>
+        android:background="@drawable/icon_globe"/>
 
     <TextView
         android:text="FAVORITES"
@@ -23,10 +23,10 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin" />
 
 
-    <ImageButton style="@style/round_button_style"
+    <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnSearch"
         android:layout_alignParentRight="true"
-        android:background="@drawable/IconSearch"/>
+        android:background="@drawable/icon_search"/>
 
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
@@ -41,16 +41,16 @@
         android:text="ALL YOUR FAVORITED RECIPES WILL BE SHOWN HERE AS SOON AS YOU ADD THEM :)"/>
 
 
-    <ImageButton style="@style/round_button_style"
+    <ImageButton style="@style/round_button_style.bottom"
         android:id="@+id/imgBtnSettings"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/IconSettings"/>
+        android:background="@drawable/icon_settings"/>
 
 
-    <ImageButton style="@style/round_button_style"
+    <ImageButton style="@style/round_button_style.bottom"
         android:id="@+id/imgBtnStar"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/IconFavourites"/>
+        android:background="@drawable/icon_favorites"/>
 
 </RelativeLayout>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xtronlabs.koochooloo">
 
@@ -7,7 +8,53 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.Screen_one"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_two"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_three"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_four"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_five"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_six"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_seven"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_eight"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_nine"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_ten"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.Screen_eleven"
+            android:screenOrientation="landscape" />
+
+        <service
+            android:name=".BackgroundMusicService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
