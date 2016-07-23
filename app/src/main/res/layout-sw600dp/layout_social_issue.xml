@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_clouds"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imgChefMale"
+        android:layout_width="315dp"
+        android:layout_height="350dp"
+        android:src="@drawable/chef_male"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/imgBottomRight"
+        android:layout_alignEnd="@+id/imgBottomRight" />
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="100"
+        android:padding="@dimen/our_activity_horizontal_margin"
+        android:maxWidth="450dp"
+        android:text="@string/the_average_ecological_footprint_of_the_swiz_is"
+        android:textColor="#000"
+        android:background="@drawable/speachbubble_down"
+        android:layout_alignTop="@+id/imgChefMale"
+        android:layout_toLeftOf="@+id/imgChefMale"
+        android:layout_toStartOf="@+id/imgChefMale"
+        android:id="@+id/view" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/take_action"
+        android:layout_above="@+id/imgBottomLeft"
+        android:layout_alignLeft="@+id/view"
+        android:layout_alignStart="@+id/view"
+        android:layout_marginBottom="50dp" />
+
+    <ImageButton style="@style/round_button_style.top"
+        android:id="@+id/imgBtnGlobe"
+        android:background="@drawable/icon_globe"/>
+
+    <TextView
+        android:text="DO YOU KNOW?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgBtnGlobe"
+        android:layout_toRightOf="@+id/imgBtnGlobe"
+        android:layout_toEndOf="@+id/imgBtnGlobe"
+        android:layout_marginTop="@dimen/our_activity_horizontal_margin"
+        android:id="@+id/textView" />
+
+    <ImageButton style="@style/round_button_style.top"
+        android:id="@+id/imgBtnSound"
+        android:background="@drawable/music_button"
+        android:layout_alignParentRight="true"/>
+
+
+
+
+    <ImageButton style="@style/round_button_style.bottom"
+        android:background="@drawable/left_arrow"
+        android:id="@+id/imgBottomLeft"
+        android:layout_alignParentBottom="true"/>
+
+    <ImageButton style="@style/round_button_style.bottom"
+        android:background="@drawable/right_arrow"
+        android:id="@+id/imgBottomRight"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

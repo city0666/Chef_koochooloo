@@ -10,4 +10,5 @@
     <dimen name="splash_chef_image_height">275dp</dimen>
     <dimen name="splash_welcome_text_size">25sp</dimen>
     <dimen name="splash_globe_width_and_height">300dp</dimen>
+    <dimen name="round_button_width_and_height">50dp</dimen>
 </resources>
