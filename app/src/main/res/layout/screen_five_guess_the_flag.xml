@@ -32,7 +32,7 @@
                 android:background="@drawable/speach_bubble"
                 android:textColor="#000"
                 android:gravity="center"
-                android:padding="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/our_activity_horizontal_margin"
                 android:textSize="18sp"
                 android:text="Do you know which of these flags belongs to Switzerland?"
                 android:layout_height="match_parent"

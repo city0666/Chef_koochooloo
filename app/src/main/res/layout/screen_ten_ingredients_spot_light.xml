@@ -19,7 +19,7 @@
         android:layout_alignTop="@+id/imgBtnGlobe"
         android:layout_toRightOf="@+id/imgBtnGlobe"
         android:layout_toEndOf="@+id/imgBtnGlobe"
-        android:layout_marginTop="@dimen/activity_horizontal_margin" />
+        android:layout_marginTop="@dimen/our_activity_horizontal_margin" />
 
     <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnSound"

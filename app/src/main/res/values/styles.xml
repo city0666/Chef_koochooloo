@@ -15,15 +15,15 @@
     </style>
 
     <style name="round_button_style.top" parent="round_button_style">
-        <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
-        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginTop">@dimen/our_activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/our_activity_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/our_activity_horizontal_margin</item>
     </style>
 
     <style name="round_button_style.bottom" parent="round_button_style">
-        <item name="android:layout_marginBottom">@dimen/activity_horizontal_margin</item>
-        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/our_activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/our_activity_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/our_activity_horizontal_margin</item>
     </style>
 
     <style name="scrollbar_shape_style">

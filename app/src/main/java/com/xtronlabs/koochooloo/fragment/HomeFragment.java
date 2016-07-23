@@ -3,6 +3,7 @@ package com.xtronlabs.koochooloo.fragment;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -56,6 +57,8 @@ public class HomeFragment extends BaseFragment {
     ImageButton mImgBtnCustomListClose;
     @BindView(R.id.customListHolder)
     RelativeLayout mCustomListHolder;
+    @BindView(R.id.globeHolder)
+    RelativeLayout mGlobeHolder;
 
     private GlobeController mGlobeController;
     private GlobeController.GestureDelegate mGestureDelegete = new GlobeController.GestureDelegate() {
@@ -116,7 +119,9 @@ public class HomeFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         GlobeController.Settings settings = new GlobeController.Settings();
-        TextureView textureView = new TextureView(getActivity());
+        settings.useSurfaceView = false;
+        int color= ContextCompat.getColor(getActivity(), android.R.color.transparent);
+        settings.clearColor = 123;
         mGlobeController = new GlobeController(getActivity(), settings);
         mGlobeController.gestureDelegate = mGestureDelegete;
         ViewGroup holder = (ViewGroup) view.findViewById(R.id.globeHolder);
@@ -135,8 +140,8 @@ public class HomeFragment extends BaseFragment {
             lp.setMargins(margin, margin, margin, margin);
 
             globe.setLayoutParams(lp);
-            mGlobeController.setClearColor(ContextCompat.getColor(getActivity(), android.R.color.transparent));
             holder.addView(globe);
+
         }
     }
 
@@ -244,5 +249,4 @@ public class HomeFragment extends BaseFragment {
                 .setDuration(400);
         translateX.start();
     }
-
 }

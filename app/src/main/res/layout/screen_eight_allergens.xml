@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
-    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:padding="@dimen/our_activity_horizontal_margin"
+    android:layout_margin="@dimen/our_activity_horizontal_margin"
     android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_list_tools"
-        android:padding="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/our_activity_horizontal_margin"
         android:layout_above="@+id/separator">
         <ScrollView
             android:layout_marginTop="65dp"

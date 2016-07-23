@@ -20,7 +20,7 @@
         android:layout_alignTop="@+id/imgBtnGlobe"
         android:layout_toRightOf="@+id/imgBtnGlobe"
         android:layout_toEndOf="@+id/imgBtnGlobe"
-        android:layout_marginTop="@dimen/activity_horizontal_margin" />
+        android:layout_marginTop="@dimen/our_activity_horizontal_margin" />
 
     <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnSound"
@@ -35,8 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/imgBtnSound"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/our_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/our_activity_horizontal_margin"
         android:layout_above="@+id/imgBottomLeft"/>
 
     <ImageButton style="@style/round_button_style.bottom"
@@ -56,7 +56,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
         android:layout_marginRight="@dimen/activity_horizontal_margin_half"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/our_activity_horizontal_margin"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_toRightOf="@+id/imgBottomLeft"
@@ -65,7 +65,7 @@
         android:textColor="#464545"
         android:maxHeight="50dp"
         android:paddingTop="20dp"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/our_activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin_half"
         android:paddingRight="@dimen/activity_horizontal_margin_half"
         android:scrollbars="vertical"

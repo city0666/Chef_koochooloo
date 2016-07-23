@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:visibility="gone"
     android:background="@drawable/background_brown_9"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:padding="@dimen/our_activity_horizontal_margin">
 
     <ScrollView
         style="@style/scrollbar_shape_style"

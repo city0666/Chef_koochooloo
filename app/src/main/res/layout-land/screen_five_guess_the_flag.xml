@@ -99,7 +99,7 @@
         android:layout_toRightOf="@+id/imgBtnGlobe"
         android:background="@drawable/speach_bubble"
         android:gravity="center"
-        android:padding="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/our_activity_horizontal_margin"
         android:text="Do you know which of these flags belongs to Switzerland?"
         android:textColor="#000"
         android:textSize="18sp" />
