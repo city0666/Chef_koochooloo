@@ -6,4 +6,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>-->
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="our_activity_horizontal_margin">16dp</dimen>
+    <dimen name="splash_chef_image_width">200dp</dimen>
+    <dimen name="splash_chef_image_height">275dp</dimen>
+    <dimen name="splash_welcome_text_size">20sp</dimen>
 </resources>

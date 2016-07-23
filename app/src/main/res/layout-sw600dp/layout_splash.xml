@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/background_clouds"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/globe_transparent"/>
+
+
+    <ImageView
+        android:id="@+id/imgChef"
+        android:layout_width="@dimen/splash_chef_image_width"
+        android:layout_height="@dimen/splash_chef_image_height"
+        android:src="@drawable/splash_chef_image"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/our_activity_horizontal_margin"
+        android:textSize="@dimen/splash_welcome_text_size"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/our_activity_horizontal_margin"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/speachbubble_new_1"
+        android:text="@string/welcome_to_chef_koochooloo"
+        android:textColor="#000"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
