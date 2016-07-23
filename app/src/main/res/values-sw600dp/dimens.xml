@@ -2,6 +2,7 @@
 <resources>
     <dimen name="about_scroll_bar_margin_top">75dp</dimen>
     <dimen name="splash_chef_image_width">400dp</dimen>
-    <dimen name="splash_chef_image_height">400dp</dimen>
-    <dimen name="splash_welcome_text_size">30sp</dimen>
+    <dimen name="splash_chef_image_height">425dp</dimen>
+    <dimen name="splash_welcome_text_size">40sp</dimen>
+    <dimen name="splash_globe_width_and_height">500dp</dimen>
 </resources>

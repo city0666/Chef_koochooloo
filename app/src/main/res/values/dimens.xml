@@ -8,5 +8,6 @@
     <dimen name="our_activity_horizontal_margin">16dp</dimen>
     <dimen name="splash_chef_image_width">200dp</dimen>
     <dimen name="splash_chef_image_height">275dp</dimen>
-    <dimen name="splash_welcome_text_size">20sp</dimen>
+    <dimen name="splash_welcome_text_size">25sp</dimen>
+    <dimen name="splash_globe_width_and_height">300dp</dimen>
 </resources>

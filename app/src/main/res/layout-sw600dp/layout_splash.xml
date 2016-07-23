@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="500dp"
-        android:layout_height="500dp"
+        android:layout_width="@dimen/splash_globe_width_and_height"
+        android:layout_height="@dimen/splash_globe_width_and_height"
         android:layout_centerInParent="true"
         android:src="@drawable/globe_transparent"/>
 
@@ -28,7 +28,7 @@
         android:textSize="@dimen/splash_welcome_text_size"
         android:gravity="center"
         android:layout_marginBottom="@dimen/our_activity_horizontal_margin"
-        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@+id/imgChef"
         android:background="@drawable/speachbubble_new_1"
         android:text="@string/welcome_to_chef_koochooloo"
         android:textColor="#000"
