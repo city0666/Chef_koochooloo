@@ -121,7 +121,7 @@ public class HomeFragment extends BaseFragment {
         GlobeController.Settings settings = new GlobeController.Settings();
         settings.useSurfaceView = false;
         int color= ContextCompat.getColor(getActivity(), android.R.color.transparent);
-        settings.clearColor = 123;
+        //settings.clearColor = 123;
         mGlobeController = new GlobeController(getActivity(), settings);
         mGlobeController.gestureDelegate = mGestureDelegete;
         ViewGroup holder = (ViewGroup) view.findViewById(R.id.globeHolder);
