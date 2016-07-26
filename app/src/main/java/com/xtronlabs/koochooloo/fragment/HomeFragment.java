@@ -3,13 +3,11 @@ package com.xtronlabs.koochooloo.fragment;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -49,16 +47,14 @@ public class HomeFragment extends BaseFragment {
     ImageButton mImgBottomLeft;
     @BindView(R.id.imgBottomRight)
     ImageButton mImgBottomRight;
-    @BindView(R.id.ltCustonListItemsHolder)
-    LinearLayout mLtCustomListItemsHolder;
-    @BindView(R.id.scrollView)
-    ScrollView mScrollView;
-    @BindView(R.id.imgBtnCustomListClose)
-    ImageButton mImgBtnCustomListClose;
-    @BindView(R.id.customListHolder)
-    RelativeLayout mCustomListHolder;
     @BindView(R.id.globeHolder)
     RelativeLayout mGlobeHolder;
+
+    private ViewGroup mCustomListHolder;
+    private ScrollView mCustomListScrollView;
+    private LinearLayout mCustomListItemsHolder;
+    private ImageButton mBtnCustomListClose;
+
 
     private GlobeController mGlobeController;
     private GlobeController.GestureDelegate mGestureDelegete = new GlobeController.GestureDelegate() {
@@ -120,8 +116,8 @@ public class HomeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         GlobeController.Settings settings = new GlobeController.Settings();
         settings.useSurfaceView = false;
-        int color= ContextCompat.getColor(getActivity(), android.R.color.transparent);
-        //settings.clearColor = 123;
+        int color = ContextCompat.getColor(getActivity(), android.R.color.transparent);
+        settings.clearColor = color;
         mGlobeController = new GlobeController(getActivity(), settings);
         mGlobeController.gestureDelegate = mGestureDelegete;
         ViewGroup holder = (ViewGroup) view.findViewById(R.id.globeHolder);
@@ -142,6 +138,24 @@ public class HomeFragment extends BaseFragment {
             globe.setLayoutParams(lp);
             holder.addView(globe);
 
+        }
+        View v = getActivity().getLayoutInflater().inflate(R.layout.include_custom_list, null, false);
+        if (v != null) {
+            mCustomListHolder = (ViewGroup) v.findViewById(R.id.customListHolder);
+            mCustomListScrollView = (ScrollView) v.findViewById(R.id.scrollView);
+            mCustomListItemsHolder = (LinearLayout) v.findViewById(R.id.ltCustonListItemsHolder);
+            mBtnCustomListClose = (ImageButton) v.findViewById(R.id.imgBtnCustomListClose);
+
+            if (mBtnCustomListClose != null) {
+                mBtnCustomListClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        animateDrawerClose();
+                    }
+                });
+            }
+            v.setVisibility(View.GONE);
+            mGlobeHolder.addView(v);
         }
     }
 
@@ -202,7 +216,7 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight, R.id.imgBtnCustomListClose})
+    @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgBtnGlobe:
@@ -216,9 +230,6 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.imgBottomRight:
                 handleRightNavigation();
-                break;
-            case R.id.imgBtnCustomListClose:
-                animateDrawerClose();
                 break;
         }
     }
@@ -236,6 +247,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void animateDrawerOpen() {
+        if (mCustomListHolder == null) return;
         mCustomListHolder.setVisibility(View.VISIBLE);
         ObjectAnimator translateX = ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX",
                 -mCustomListHolder.getWidth(), 0)
