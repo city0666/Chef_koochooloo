@@ -57,7 +57,8 @@ public class HomeFragment extends BaseFragment {
 
 
     private GlobeController mGlobeController;
-    private GlobeController.GestureDelegate mGestureDelegete = new GlobeController.GestureDelegate() {
+    private GlobeController.GestureDelegate mGestureDelegete =
+            new GlobeController.GestureDelegate() {
         @Override
         public void userDidSelect(GlobeController globeController, SelectedObject[] selectedObjects,
                                   Point2d point2d, Point2d point2d1) {
@@ -136,6 +137,7 @@ public class HomeFragment extends BaseFragment {
             lp.setMargins(margin, margin, margin, margin);
 
             globe.setLayoutParams(lp);
+            globe.setPadding(8,8,8,8);
             holder.addView(globe);
 
         }
