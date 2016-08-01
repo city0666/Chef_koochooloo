@@ -40,16 +40,20 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
     @Override
     public void onBindViewHolder(final CountryItemViewHolder holder, int position) {
         Country country = mCountries[position];
-        Glide.with(mContext)
-                .load(country.countryFlag.toString())
-                .into(new SimpleTarget<GlideDrawable>() {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                        holder.imgFlag.setImageDrawable(resource);
-                    }
-                });
+        try {
+            Glide.with(mContext)
+                    .load(country.countryFlag.toString())
+                    .into(new SimpleTarget<GlideDrawable>() {
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                            holder.imgFlag.setImageDrawable(resource);
+                        }
+                    });
 
-        holder.lblCountryName.setText(country.name);
+            holder.lblCountryName.setText(country.name);
+        } catch (Exception e){
+            //ignore for now
+        }
     }
 
     @Override

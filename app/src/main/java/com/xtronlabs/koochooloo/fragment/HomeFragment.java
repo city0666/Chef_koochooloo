@@ -159,7 +159,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(min, min);
             lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
             globe.setLayoutParams(lp);
-            globe.setPadding(8,8,8,8);
+            globe.setPadding(8, 8, 8, 8);
             holder.addView(globe);
 
         }
@@ -303,8 +303,22 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     public void processResponse(Country[] response) {
         M.log("CALL", "Response from get countries request : response status = "
                 + response == null ? "NULL" : "NOT NULL");
-        if (response == null) return;
-        if (response.length <= 0) return;
+        /*if (response == null) ;
+        if (response.length <= 0) {
+            response = new Country[10];
+            for (int i = 0; i < 10; i++) {
+                response[i].name = "Country " + i;
+            }
+        }*/
+
+        response = new Country[10];
+        for (int i = 0; i < 10; i++) {
+            Country c = new Country();
+            c.name = "Country " + i;
+            response[i] = c;
+        }
+
+
         M.log("CALL", "Response from get countries request : response status = " + response.length);
         CountryListAdapter adapter = new CountryListAdapter(response, getActivity());
         mCountriesList.setAdapter(adapter);
