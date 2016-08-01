@@ -14,7 +14,7 @@
         android:layout_above="@+id/separator">
         <ScrollView
             android:layout_marginTop="65dp"
-            android:id="@+id/scrollView"
+            android:id="@+id/countryList"
             style="@style/scrollbar_shape_style"
             android:layout_marginBottom="25dp"
             android:layout_width="match_parent"

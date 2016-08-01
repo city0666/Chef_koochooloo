@@ -28,7 +28,7 @@
         android:layout_height="match_parent">
 
         <ScrollView
-            android:id="@+id/scrollView"
+            android:id="@+id/countryList"
             android:layout_marginTop="@dimen/about_scroll_bar_margin_top"
             android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
             android:layout_marginRight="@dimen/activity_horizontal_margin_half"

@@ -4,27 +4,17 @@
     android:id="@+id/customListHolder"
     android:minWidth="250dp"
     android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:layout_marginTop="62dp"
     android:visibility="gone"
     android:background="@drawable/background_brown_9"
     android:padding="@dimen/our_activity_horizontal_margin">
 
-    <ScrollView
-        style="@style/scrollbar_shape_style"
-        android:layout_width="wrap_content"
-        android:minWidth="250dp"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView">
-
-        <LinearLayout
-            android:id="@+id/ltCustonListItemsHolder"
-            android:layout_width="wrap_content"
-            android:minWidth="250dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-    </ScrollView>
+<android.support.v7.widget.RecyclerView
+    style="@style/scrollbar_shape_style"
+    android:id="@+id/countryList"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"/>
 
 
     <ImageButton
@@ -32,8 +22,10 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/icon_exit"
-        android:layout_toRightOf="@+id/scrollView"
+        android:layout_toRightOf="@+id/countryList"
+        android:layout_toEndOf="@+id/countryList"
         android:layout_marginLeft="-20dp"/>
+
 
 
 </RelativeLayout>

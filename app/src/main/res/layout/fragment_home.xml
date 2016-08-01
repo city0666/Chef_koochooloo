@@ -12,7 +12,7 @@
         android:background="@drawable/icon_globe"/>
 
     <TextView
-        android:text="SWITZERLAND"
+        android:id="@+id/lblSelectedCountry"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_width="wrap_content"
@@ -21,6 +21,17 @@
         android:layout_toRightOf="@+id/imgBtnGlobe"
         android:layout_toEndOf="@+id/imgBtnGlobe"
         android:layout_marginTop="@dimen/our_activity_horizontal_margin" />
+
+    <EditText
+        android:id="@+id/txtSearch"
+        android:paddingLeft="30dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgBtnGlobe"
+        android:layout_alignLeft="@+id/imgBtnGlobe"
+        android:layout_alignStart="@+id/imgBtnGlobe"
+        android:layout_marginLeft="27dp"
+        android:layout_marginStart="27dp" />
 
     <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnSound"

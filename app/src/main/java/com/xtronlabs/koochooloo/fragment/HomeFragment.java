@@ -3,17 +3,22 @@ package com.xtronlabs.koochooloo.fragment;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.mousebird.maply.GlobeController;
 import com.mousebird.maply.MBTiles;
@@ -24,6 +29,12 @@ import com.mousebird.maply.Point3d;
 import com.mousebird.maply.QuadImageTileLayer;
 import com.mousebird.maply.SelectedObject;
 import com.xtronlabs.koochooloo.R;
+import com.xtronlabs.koochooloo.adapter.CountryListAdapter;
+import com.xtronlabs.koochooloo.util.M;
+import com.xtronlabs.koochooloo.util.network.NetworkManager;
+import com.xtronlabs.koochooloo.util.network.request.GetCountriesRequest;
+import com.xtronlabs.koochooloo.util.network.response_models.Country;
+import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,7 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements ProcessResponseInterface<Country[]> {
 
     private static final String MB_TILES_DIR = "mbtiles";
     @BindView(R.id.imgBtnGlobe)
@@ -49,48 +60,60 @@ public class HomeFragment extends BaseFragment {
     ImageButton mImgBottomRight;
     @BindView(R.id.globeHolder)
     RelativeLayout mGlobeHolder;
+    @BindView(R.id.lblSelectedCountry)
+    TextView mLblSelectedCountry;
+    @BindView(R.id.txtSearch)
+    EditText mTxtSearch;
+    @BindView(R.id.countryList)
+    RecyclerView mCountriesList;
+    @BindView(R.id.imgBtnCustomListClose)
+    ImageButton mImgBtnCustomListClose;
+    @BindView(R.id.customListHolder)
+    RelativeLayout mCustomListHolder;
 
-    private ViewGroup mCustomListHolder;
-    private ScrollView mCustomListScrollView;
-    private LinearLayout mCustomListItemsHolder;
+    /*private ViewGroup mCustomListHolder;
+    private RecyclerView mCustomListScrollView;
     private ImageButton mBtnCustomListClose;
-
+    */
 
     private GlobeController mGlobeController;
     private GlobeController.GestureDelegate mGestureDelegete =
             new GlobeController.GestureDelegate() {
-        @Override
-        public void userDidSelect(GlobeController globeController, SelectedObject[] selectedObjects,
-                                  Point2d point2d, Point2d point2d1) {
+                @Override
+                public void userDidSelect(GlobeController globeController, SelectedObject[] selectedObjects,
+                                          Point2d point2d, Point2d point2d1) {
 
-        }
+                }
 
-        @Override
-        public void userDidTap(GlobeController globeController, Point2d point2d, Point2d point2d1) {
+                @Override
+                public void userDidTap(GlobeController globeController, Point2d point2d, Point2d point2d1) {
 
-        }
+                }
 
-        @Override
-        public void userDidLongPress(GlobeController globeController, SelectedObject[] selectedObjects,
-                                     Point2d point2d, Point2d point2d1) {
+                @Override
+                public void userDidLongPress(GlobeController globeController, SelectedObject[] selectedObjects,
+                                             Point2d point2d, Point2d point2d1) {
 
-        }
+                }
 
-        @Override
-        public void globeDidStartMoving(GlobeController globeController, boolean b) {
+                @Override
+                public void globeDidStartMoving(GlobeController globeController, boolean b) {
 
-        }
+                }
 
-        @Override
-        public void globeDidStopMoving(GlobeController globeController, Point3d[] point3ds, boolean b) {
+                @Override
+                public void globeDidStopMoving(GlobeController globeController, Point3d[] point3ds, boolean b) {
 
-        }
+                }
 
-        @Override
-        public void globeDidMove(GlobeController globeController, Point3d[] point3ds, boolean b) {
+                @Override
+                public void globeDidMove(GlobeController globeController, Point3d[] point3ds, boolean b) {
 
-        }
-    };
+                }
+            };
+    private boolean isDrawerOpen = false;
+    private AlertDialog mNoNetworkDialog;
+
 
     public HomeFragment() {
         //Required public empty constructor
@@ -115,6 +138,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mTxtSearch.setVisibility(View.GONE);
         GlobeController.Settings settings = new GlobeController.Settings();
         settings.useSurfaceView = false;
         int color = ContextCompat.getColor(getActivity(), android.R.color.transparent);
@@ -134,31 +158,20 @@ public class HomeFragment extends BaseFragment {
 
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(min, min);
             lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-            lp.setMargins(margin, margin, margin, margin);
-
             globe.setLayoutParams(lp);
             globe.setPadding(8,8,8,8);
             holder.addView(globe);
 
         }
-        View v = getActivity().getLayoutInflater().inflate(R.layout.include_custom_list, null, false);
-        if (v != null) {
-            mCustomListHolder = (ViewGroup) v.findViewById(R.id.customListHolder);
-            mCustomListScrollView = (ScrollView) v.findViewById(R.id.scrollView);
-            mCustomListItemsHolder = (LinearLayout) v.findViewById(R.id.ltCustonListItemsHolder);
-            mBtnCustomListClose = (ImageButton) v.findViewById(R.id.imgBtnCustomListClose);
 
-            if (mBtnCustomListClose != null) {
-                mBtnCustomListClose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        animateDrawerClose();
-                    }
-                });
-            }
-            v.setVisibility(View.GONE);
-            mGlobeHolder.addView(v);
-        }
+        ViewGroup parent = (ViewGroup) mImgBtnGlobe.getParent();
+        int index = parent.indexOfChild(mCustomListHolder);
+        parent.bringChildToFront(parent.getChildAt(index));
+        index = parent.indexOfChild(mTxtSearch);
+        parent.bringChildToFront(parent.getChildAt(index));
+        index = parent.indexOfChild(mImgBtnGlobe);
+        parent.bringChildToFront(parent.getChildAt(index));
+        //mGlobeController.animatePositionGeo(-3.6704803, 40.5023056, 5, 1.0);
     }
 
     @Override
@@ -174,8 +187,12 @@ public class HomeFragment extends BaseFragment {
                 }
             }
         });
-    }
 
+
+        //new GetCountriesRequest(getActivity(), this);
+        checkNetworkAndCallForCountryList();
+        M.log("CALL", "Get country request send");
+    }
 
     private void setupGlobe(GlobeController globeController) throws Exception {
         globeController.addLayer(setUpImageLayer(globeController));
@@ -217,12 +234,12 @@ public class HomeFragment extends BaseFragment {
         return file;
     }
 
-
-    @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight})
+    @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight
+            , R.id.imgBtnCustomListClose})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgBtnGlobe:
-                animateDrawerOpen();
+                toggleDrawerAndSearch();
                 break;
             case R.id.imgBtnSound:
                 manageSound();
@@ -232,6 +249,9 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.imgBottomRight:
                 handleRightNavigation();
+                break;
+            case R.id.imgBtnCustomListClose:
+                animateDrawerClose();
                 break;
         }
     }
@@ -248,19 +268,80 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+    private void toggleDrawerAndSearch() {
+        if (isDrawerOpen) animateDrawerClose();
+        else animateDrawerOpen();
+    }
+
     private void animateDrawerOpen() {
         if (mCustomListHolder == null) return;
         mCustomListHolder.setVisibility(View.VISIBLE);
-        ObjectAnimator translateX = ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX",
-                -mCustomListHolder.getWidth(), 0)
-                .setDuration(600);
-        translateX.start();
+        mTxtSearch.setVisibility(View.VISIBLE);
+        ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX", -mCustomListHolder.getWidth(), 0)
+                .setDuration(600)
+                .start();
+        isDrawerOpen = true;
+
+        ObjectAnimator.ofFloat(mTxtSearch, "TranslationX", -mCustomListHolder.getWidth(), 0)
+                .setDuration(600)
+                .start();
+
     }
 
     private void animateDrawerClose() {
-        ObjectAnimator translateX = ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX",
+        ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX",
                 0, -mCustomListHolder.getWidth())
-                .setDuration(400);
-        translateX.start();
+                .setDuration(400)
+                .start();
+        isDrawerOpen = false;
+        ObjectAnimator.ofFloat(mTxtSearch, "TranslationX", 0, -mCustomListHolder.getWidth())
+                .setDuration(600)
+                .start();
     }
+
+    @Override
+    public void processResponse(Country[] response) {
+        M.log("CALL", "Response from get countries request : response status = "
+                + response == null ? "NULL" : "NOT NULL");
+        if (response == null) return;
+        if (response.length <= 0) return;
+        M.log("CALL", "Response from get countries request : response status = " + response.length);
+        CountryListAdapter adapter = new CountryListAdapter(response, getActivity());
+        mCountriesList.setAdapter(adapter);
+        mCountriesList.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private void checkNetworkAndCallForCountryList() {
+        if (NetworkManager.isNetworkAvsilable(getActivity()))
+            new GetCountriesRequest(getActivity(), this);
+        else {
+            mNoNetworkDialog = new AlertDialog.Builder(getActivity())
+                    .setTitle(getString(R.string.app_name))
+                    .setMessage("Network Unavailable")
+                    .setCancelable(false)
+                    .setPositiveButton("RETRY", null)
+                    .create();
+
+            mNoNetworkDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    Button b = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                    if (b != null) {
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (NetworkManager.isNetworkAvsilable(getActivity())) {
+                                    if (mNoNetworkDialog != null)
+                                        mNoNetworkDialog.dismiss();
+                                    checkNetworkAndCallForCountryList();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+            mNoNetworkDialog.show();
+        }
+    }
+
 }
