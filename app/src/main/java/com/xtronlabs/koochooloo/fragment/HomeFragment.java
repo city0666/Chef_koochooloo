@@ -326,7 +326,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     }
 
     private void checkNetworkAndCallForCountryList() {
-        if (NetworkManager.isNetworkAvsilable(getActivity()))
+        if (NetworkManager.isNetworkAvailable(getActivity()))
             new GetCountriesRequest(getActivity(), this);
         else {
             mNoNetworkDialog = new AlertDialog.Builder(getActivity())
@@ -344,7 +344,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                         b.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                if (NetworkManager.isNetworkAvsilable(getActivity())) {
+                                if (NetworkManager.isNetworkAvailable(getActivity())) {
                                     if (mNoNetworkDialog != null)
                                         mNoNetworkDialog.dismiss();
                                     checkNetworkAndCallForCountryList();
