@@ -3,7 +3,7 @@
     package="com.xtronlabs.koochooloo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -55,9 +55,15 @@
             android:screenOrientation="landscape" />
 
         <service
-            android:name=".BackgroundMusicService"
+            android:name=".service.BackgroundMusicService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="false" />
+
+        <provider
+            android:name=".content.KoochoolooContentProvider"
+            android:authorities="com.xtronlabs.koochooloo.provider"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

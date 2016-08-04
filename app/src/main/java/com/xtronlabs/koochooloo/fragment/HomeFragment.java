@@ -171,7 +171,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         parent.bringChildToFront(parent.getChildAt(index));
         index = parent.indexOfChild(mImgBtnGlobe);
         parent.bringChildToFront(parent.getChildAt(index));
-        //mGlobeController.animatePositionGeo(-3.6704803, 40.5023056, 5, 1.0);
+        mGlobeController.getGlobeView().currentMapScale(0.9f, 0.9f);
+        mGlobeController.setZoomLimits(0.9f, 0.9f);
     }
 
     @Override
