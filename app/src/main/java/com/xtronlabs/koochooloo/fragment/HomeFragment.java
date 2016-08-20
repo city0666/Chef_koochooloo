@@ -4,7 +4,9 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -28,6 +30,8 @@ import com.mousebird.maply.Point2d;
 import com.mousebird.maply.Point3d;
 import com.mousebird.maply.QuadImageTileLayer;
 import com.mousebird.maply.SelectedObject;
+import com.mousebird.maply.VectorInfo;
+import com.mousebird.maply.VectorObject;
 import com.xtronlabs.koochooloo.R;
 import com.xtronlabs.koochooloo.adapter.CountryListAdapter;
 import com.xtronlabs.koochooloo.util.M;
@@ -35,6 +39,8 @@ import com.xtronlabs.koochooloo.util.network.NetworkManager;
 import com.xtronlabs.koochooloo.util.network.request.GetCountriesRequest;
 import com.xtronlabs.koochooloo.util.network.response_models.Country;
 import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -50,6 +56,7 @@ import butterknife.OnClick;
 public class HomeFragment extends BaseFragment implements ProcessResponseInterface<Country[]> {
 
     private static final String MB_TILES_DIR = "mbtiles";
+    private static final String JSON_DIR = "country_json_50m";
     @BindView(R.id.imgBtnGlobe)
     ImageButton mImgBtnGlobe;
     @BindView(R.id.imgBtnSound)
@@ -193,6 +200,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         //new GetCountriesRequest(getActivity(), this);
         checkNetworkAndCallForCountryList();
         M.log("CALL", "Get country request send");
+        new LoadCountryBoundariesAsync().execute();
     }
 
     private void setupGlobe(GlobeController globeController) throws Exception {
@@ -200,7 +208,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     }
 
     private QuadImageTileLayer setUpImageLayer(MaplyBaseController baseController) throws Exception {
-        File mbTiles = getMbTileFile("mbtiles/geography-class_medres.mbtiles",
+        File mbTiles = getAssetFile("mbtiles/geography-class_medres.mbtiles",
                 "geography-class_medres.mbtiles");
 
         MBTiles mbTilesFile = new MBTiles(mbTiles);
@@ -212,7 +220,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         return imageTileLayer;
     }
 
-    private File getMbTileFile(String assetPath, String assetFileName) throws IOException {
+    private File getAssetFile(String assetPath, String assetFileName) throws IOException {
         ContextWrapper wrapper = new ContextWrapper(getActivity());
         File mbTilesDirectory = wrapper.getDir(MB_TILES_DIR, Context.MODE_PRIVATE);
 
@@ -235,6 +243,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         return file;
     }
 
+    //region temp
     @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight
             , R.id.imgBtnCustomListClose})
     public void onClick(View view) {
@@ -358,5 +367,49 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             mNoNetworkDialog.show();
         }
     }
+
+    //endregion
+    private class LoadCountryBoundariesAsync extends AsyncTask<Void, VectorObject, Void> {
+
+
+        VectorInfo vectorInfo = new VectorInfo();
+
+        public LoadCountryBoundariesAsync() {
+            vectorInfo.setColor(R.color.colorAccent);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                String[] files = getActivity().getAssets().list(JSON_DIR);
+                if (files == null) return null;
+                if (files.length <= 0) return null;
+                for (String s : files) {
+                    InputStream is = getActivity().getAssets().open(JSON_DIR + "/" + s);
+                    int size = is.available();
+                    byte[] contents = new byte[size];
+                    is.read(contents);
+                    String json = new String(contents, "UTF-8");
+                    if (json != null) {
+                        VectorObject vectorObject = new VectorObject();
+                        vectorObject.fromGeoJSON(json);
+                        publishProgress(vectorObject);
+                    }
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(VectorObject... values) {
+            super.onProgressUpdate(values);
+            VectorObject object = values[0];
+            mGlobeController.addVector(object, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
+        }
+    }
+
 
 }
