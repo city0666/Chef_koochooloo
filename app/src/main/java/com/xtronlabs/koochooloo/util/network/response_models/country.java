@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "id",
         "code",
         "name",
         "capital",
@@ -17,6 +18,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class Country {
 
+    @JsonProperty("id")
+    public Integer id;
     @JsonProperty("code")
     public String code;
     @JsonProperty("name")
@@ -26,11 +29,11 @@ public class Country {
     @JsonProperty("population")
     public Integer population;
     @JsonProperty("national_dish")
-    public String nationalDish;
+    public Object nationalDish;
     @JsonProperty("country_image")
-    public Object countryImage;
+    public String countryImage;
     @JsonProperty("country_flag")
-    public Object countryFlag;
+    public String countryFlag;
 
 }
 

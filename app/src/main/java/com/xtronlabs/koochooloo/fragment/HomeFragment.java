@@ -37,6 +37,7 @@ import com.xtronlabs.koochooloo.adapter.CountryListAdapter;
 import com.xtronlabs.koochooloo.util.M;
 import com.xtronlabs.koochooloo.util.network.NetworkManager;
 import com.xtronlabs.koochooloo.util.network.request.GetCountriesRequest;
+import com.xtronlabs.koochooloo.util.network.response_models.Countries;
 import com.xtronlabs.koochooloo.util.network.response_models.Country;
 import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
 
@@ -47,13 +48,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class HomeFragment extends BaseFragment implements ProcessResponseInterface<Country[]> {
+public class HomeFragment extends BaseFragment implements ProcessResponseInterface<Countries>, CountryListAdapter.IShowCountry {
 
     private static final String MB_TILES_DIR = "mbtiles";
     private static final String JSON_DIR = "country_json_50m";
@@ -121,6 +123,14 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     private boolean isDrawerOpen = false;
     private AlertDialog mNoNetworkDialog;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+
+        checkNetworkAndCallForCountryList();
+        M.log("CALL", "Get country request send");
+    }
 
     public HomeFragment() {
         //Required public empty constructor
@@ -195,12 +205,6 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 }
             }
         });
-
-
-        //new GetCountriesRequest(getActivity(), this);
-        checkNetworkAndCallForCountryList();
-        M.log("CALL", "Get country request send");
-        new LoadCountryBoundariesAsync().execute();
     }
 
     private void setupGlobe(GlobeController globeController) throws Exception {
@@ -243,7 +247,6 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         return file;
     }
 
-    //region temp
     @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight
             , R.id.imgBtnCustomListClose})
     public void onClick(View view) {
@@ -310,29 +313,18 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     }
 
     @Override
-    public void processResponse(Country[] response) {
+    public void processResponse(Countries response) {
         M.log("CALL", "Response from get countries request : response status = "
                 + response == null ? "NULL" : "NOT NULL");
-        /*if (response == null) ;
-        if (response.length <= 0) {
-            response = new Country[10];
-            for (int i = 0; i < 10; i++) {
-                response[i].name = "Country " + i;
-            }
-        }*/
+        if (response == null) return;
 
-        response = new Country[10];
-        for (int i = 0; i < 10; i++) {
-            Country c = new Country();
-            c.name = "Country " + i;
-            response[i] = c;
-        }
-
-
-        M.log("CALL", "Response from get countries request : response status = " + response.length);
-        CountryListAdapter adapter = new CountryListAdapter(response, getActivity());
+        M.log("CALL", "Response from get countries request : response status = " + response.countries.size());
+        Country[] c = new Country[]{};
+        response.countries.toArray(c);
+        CountryListAdapter adapter = new CountryListAdapter(c, getActivity(),this);
         mCountriesList.setAdapter(adapter);
         mCountriesList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter.notifyDataSetChanged();
     }
 
     private void checkNetworkAndCallForCountryList() {
@@ -368,7 +360,52 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         }
     }
 
-    //endregion
+    @Override
+    public void showCountry(Country country) {
+        if (country == null) return;
+        new LoadCountryAsync().execute(country);
+    }
+
+    private class LoadCountryAsync extends AsyncTask<Country, Void, VectorObject> {
+
+
+        VectorInfo vectorInfo = new VectorInfo();
+
+        public LoadCountryAsync() {
+            vectorInfo.setColor(R.color.colorAccent);
+        }
+
+        @Override
+        protected VectorObject doInBackground(Country... params) {
+            try {
+                Country c = params[0];
+                String fileName = c.code;
+
+                InputStream is = getActivity().getAssets().open(JSON_DIR + "/" + fileName+".geojson");
+                int size = is.available();
+                byte[] contents = new byte[size];
+                is.read(contents);
+                String json = new String(contents, "UTF-8");
+                if (json != null) {
+                    VectorObject vectorObject = new VectorObject();
+                    vectorObject.fromGeoJSON(json);
+                    return vectorObject;
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(VectorObject vectorObject) {
+            super.onPostExecute(vectorObject);
+            mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
+        }
+    }
+
+    @Deprecated
     private class LoadCountryBoundariesAsync extends AsyncTask<Void, VectorObject, Void> {
 
 

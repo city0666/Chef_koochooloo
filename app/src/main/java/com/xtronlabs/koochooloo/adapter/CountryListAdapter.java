@@ -24,11 +24,14 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
 
     private Country[] mCountries;
     private Context mContext;
+    private IShowCountry mIShowCountry;
 
-    public CountryListAdapter(Country[] mCountries, Context mContext) {
+    public CountryListAdapter(Country[] mCountries, Context mContext,IShowCountry iShowCountry) {
         this.mCountries = mCountries;
         this.mContext = mContext;
+        mIShowCountry = iShowCountry;
     }
+
 
     @Override
     public CountryItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,7 +54,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
                     });
 
             holder.lblCountryName.setText(country.name);
-        } catch (Exception e){
+        } catch (Exception e) {
             //ignore for now
         }
     }
@@ -75,8 +78,19 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
 
         @Override
         public void onClick(View v) {
+            Country c = mCountries[getAdapterPosition()];
+            if (c == null) {
+                //do something here or just ignore it
+                return;
+            }
+            if (mIShowCountry != null)
+                mIShowCountry.showCountry(c);
 
         }
+    }
+
+    public interface IShowCountry {
+        void showCountry(Country country);
     }
 
 }

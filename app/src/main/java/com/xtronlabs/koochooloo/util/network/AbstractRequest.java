@@ -13,7 +13,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public abstract class AbstractRequest {
 
-    private static final String BASE_URI = "http://ec2-52-32-59-79.us-west-2.compute.amazonaws.com/api/v1/";
+    private static final String BASE_URI = "http://ec2-52-42-15-208.us-west-2.compute.amazonaws.com/api/v1/";
     protected final Context mContext;
     protected KoochoolooNetworkInterface mNetworkInterface;
 

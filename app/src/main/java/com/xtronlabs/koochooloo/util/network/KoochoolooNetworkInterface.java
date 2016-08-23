@@ -1,6 +1,7 @@
 package com.xtronlabs.koochooloo.util.network;
 
 
+import com.xtronlabs.koochooloo.util.network.response_models.Countries;
 import com.xtronlabs.koochooloo.util.network.response_models.Country;
 import com.xtronlabs.koochooloo.util.network.response_models.Fact;
 import com.xtronlabs.koochooloo.util.network.response_models.Ingredient;
@@ -12,8 +13,10 @@ import retrofit2.http.Path;
 
 public interface KoochoolooNetworkInterface {
 
-    @GET("countries")
-    Call<Country[]> getCountries();
+    String AT = "24df4bb0f01e43f91c55a259fcc01212";
+
+    @GET("countries?lang=en&access_token="+AT)
+    Call<Countries> getCountries();
 
     @GET("countries/{id}/facts?lang=en")
     Call<Fact[]> getFactForCountry(@Path("id") int id);
