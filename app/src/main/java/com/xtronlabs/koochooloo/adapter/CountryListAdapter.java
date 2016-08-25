@@ -16,17 +16,18 @@ import com.xtronlabs.koochooloo.util.network.response_models.Country;
 import com.xtronlabs.koochooloo.view.KoochoolooLabel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Xtron005 on 01-08-2016.
  */
 public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.CountryItemViewHolder> {
 
-    private Country[] mCountries;
+    private List<Country> mCountries;
     private Context mContext;
     private IShowCountry mIShowCountry;
 
-    public CountryListAdapter(Country[] mCountries, Context mContext,IShowCountry iShowCountry) {
+    public CountryListAdapter(List<Country> mCountries, Context mContext,IShowCountry iShowCountry) {
         this.mCountries = mCountries;
         this.mContext = mContext;
         mIShowCountry = iShowCountry;
@@ -42,7 +43,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
 
     @Override
     public void onBindViewHolder(final CountryItemViewHolder holder, int position) {
-        Country country = mCountries[position];
+        Country country = mCountries.get(position);
         try {
             Glide.with(mContext)
                     .load(country.countryFlag.toString())
@@ -61,7 +62,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
 
     @Override
     public int getItemCount() {
-        return mCountries.length;
+        return mCountries.size();
     }
 
     class CountryItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -78,7 +79,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
 
         @Override
         public void onClick(View v) {
-            Country c = mCountries[getAdapterPosition()];
+            Country c = mCountries.get(getAdapterPosition());
             if (c == null) {
                 //do something here or just ignore it
                 return;

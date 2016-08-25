@@ -319,9 +319,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         if (response == null) return;
 
         M.log("CALL", "Response from get countries request : response status = " + response.countries.size());
-        Country[] c = new Country[]{};
-        response.countries.toArray(c);
-        CountryListAdapter adapter = new CountryListAdapter(c, getActivity(),this);
+        CountryListAdapter adapter = new CountryListAdapter(response.countries, getActivity(),this);
         mCountriesList.setAdapter(adapter);
         mCountriesList.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter.notifyDataSetChanged();
