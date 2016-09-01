@@ -27,7 +27,7 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
     private Context mContext;
     private IShowCountry mIShowCountry;
 
-    public CountryListAdapter(List<Country> mCountries, Context mContext,IShowCountry iShowCountry) {
+    public CountryListAdapter(List<Country> mCountries, Context mContext, IShowCountry iShowCountry) {
         this.mCountries = mCountries;
         this.mContext = mContext;
         mIShowCountry = iShowCountry;
@@ -40,6 +40,13 @@ public class CountryListAdapter extends RecyclerView.Adapter<CountryListAdapter.
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.country_list_item, parent, false));
     }
+
+
+    public List<Country> getmCountries() {
+        return mCountries;
+    }
+
+
 
     @Override
     public void onBindViewHolder(final CountryItemViewHolder holder, int position) {

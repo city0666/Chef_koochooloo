@@ -6,16 +6,17 @@ import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,21 +42,19 @@ import com.xtronlabs.koochooloo.util.network.response_models.Countries;
 import com.xtronlabs.koochooloo.util.network.response_models.Country;
 import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
 
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class HomeFragment extends BaseFragment implements ProcessResponseInterface<Countries>, CountryListAdapter.IShowCountry {
+public class HomeFragment extends BaseFragment implements ProcessResponseInterface<Countries>, CountryListAdapter.IShowCountry, TextView.OnEditorActionListener {
 
     private static final String MB_TILES_DIR = "mbtiles";
     private static final String JSON_DIR = "country_json_50m";
@@ -84,6 +83,9 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     private RecyclerView mCustomListScrollView;
     private ImageButton mBtnCustomListClose;
     */
+
+
+    private CountryListAdapter mCountryListAdapter;
 
     private GlobeController mGlobeController;
     private GlobeController.GestureDelegate mGestureDelegete =
@@ -189,7 +191,12 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         index = parent.indexOfChild(mImgBtnGlobe);
         parent.bringChildToFront(parent.getChildAt(index));
         mGlobeController.getGlobeView().currentMapScale(0.9f, 0.9f);
-        mGlobeController.setZoomLimits(0.9f, 0.9f);
+        mGlobeController.setZoomLimits(0.5f, 0.5f);
+
+        if (mTxtSearch != null) {
+            mTxtSearch.setOnEditorActionListener(this);
+        }
+
     }
 
     @Override
@@ -319,10 +326,10 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         if (response == null) return;
 
         M.log("CALL", "Response from get countries request : response status = " + response.countries.size());
-        CountryListAdapter adapter = new CountryListAdapter(response.countries, getActivity(),this);
-        mCountriesList.setAdapter(adapter);
+        mCountryListAdapter = new CountryListAdapter(response.countries, getActivity(), this);
+        mCountriesList.setAdapter(mCountryListAdapter);
         mCountriesList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter.notifyDataSetChanged();
+        mCountryListAdapter.notifyDataSetChanged();
     }
 
     private void checkNetworkAndCallForCountryList() {
@@ -364,6 +371,32 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         new LoadCountryAsync().execute(country);
     }
 
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            findCountryAndScrollToPosition(v.getText().toString());
+            return true;
+        }
+        return false;
+    }
+
+    public void findCountryAndScrollToPosition(String country) {
+        if (mCountryListAdapter == null) return;
+
+        List<Country> countries = mCountryListAdapter.getmCountries();
+        if (countries == null) return;
+        for (int i = 0; i < countries.size(); i++) {
+            Country c = countries.get(i);
+            String lower = c.name.toLowerCase();
+            if (lower.startsWith(country.toLowerCase())) {
+                if (mCountriesList == null) return;
+                mCountriesList.smoothScrollToPosition(i);
+                break;
+            }
+        }
+
+    }
+
     private class LoadCountryAsync extends AsyncTask<Country, Void, VectorObject> {
 
 
@@ -379,7 +412,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 Country c = params[0];
                 String fileName = c.code;
 
-                InputStream is = getActivity().getAssets().open(JSON_DIR + "/" + fileName+".geojson");
+                InputStream is = getActivity().getAssets().open(JSON_DIR + "/" + fileName + ".geojson");
                 int size = is.available();
                 byte[] contents = new byte[size];
                 is.read(contents);
@@ -387,9 +420,9 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 if (json != null) {
                     VectorObject vectorObject = new VectorObject();
                     vectorObject.fromGeoJSON(json);
+                    //vectorObject.selectable=true;
                     return vectorObject;
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -399,7 +432,11 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         @Override
         protected void onPostExecute(VectorObject vectorObject) {
             super.onPostExecute(vectorObject);
+
             mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
+
+            //mGlobeController.animatePositionGeo(-3.6704803, 40.5023056, 5, 1.0);
+            //mGlobeController.animatePositionGeo(vectorObject.getAttributes().getDouble(""));
         }
     }
 

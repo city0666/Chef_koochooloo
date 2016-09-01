@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imgFlag"
-        android:layout_width="50dp"
-        android:layout_height="35dp" />
+        android:layout_width="40dp"
+        android:layout_height="25dp" />
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:id="@+id/lblCountryName"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         app:customFont="font.ttf"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
