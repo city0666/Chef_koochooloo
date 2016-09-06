@@ -54,5 +54,6 @@
         android:layout_alignParentRight="true"/>
 
     <include layout="@layout/include_custom_list"/>
+    <include layout="@layout/extra_fact_pop_up"/>
 
 </RelativeLayout>

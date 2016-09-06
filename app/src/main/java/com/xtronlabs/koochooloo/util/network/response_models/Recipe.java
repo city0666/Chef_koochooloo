@@ -10,10 +10,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "id",
         "name",
         "time",
-        "presentation",
-        "ingredients",
-        "images",
-        "steps"
+        "thumbnail",
+        "updated_at"
 })
 public class Recipe {
 
@@ -23,13 +21,9 @@ public class Recipe {
     public String name;
     @JsonProperty("time")
     public String time;
-    @JsonProperty("presentation")
-    public String presentation;
-    @JsonProperty("ingredients")
-    public List<Ingredient> ingredients = new ArrayList<Ingredient>();
-    @JsonProperty("images")
-    public List<RecipeImage> images = new ArrayList<RecipeImage>();
-    @JsonProperty("steps")
-    public List<Step> steps = new ArrayList<Step>();
+    @JsonProperty("thumbnail")
+    public String thumbnail;
+    @JsonProperty("updated_at")
+    public String updatedAt;
 
 }

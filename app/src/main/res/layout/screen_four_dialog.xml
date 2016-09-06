@@ -20,6 +20,7 @@
         android:background="@drawable/background_brown_9"/>
 
     <ImageButton
+        android:id="@+id/btnDialogOk"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@+id/lblDialogRemove"
@@ -35,6 +36,7 @@
         android:layout_below="@+id/lblDialogRemove"/>
 
     <ImageButton
+        android:id="@+id/btnDialogCancel"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@+id/lblDialogRemove"

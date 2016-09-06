@@ -4,8 +4,10 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,13 +37,17 @@ import com.mousebird.maply.SelectedObject;
 import com.mousebird.maply.VectorInfo;
 import com.mousebird.maply.VectorObject;
 import com.xtronlabs.koochooloo.R;
+import com.xtronlabs.koochooloo.activity.RecipeActivity;
 import com.xtronlabs.koochooloo.adapter.CountryListAdapter;
 import com.xtronlabs.koochooloo.util.M;
 import com.xtronlabs.koochooloo.util.network.NetworkManager;
 import com.xtronlabs.koochooloo.util.network.request.GetCountriesRequest;
+import com.xtronlabs.koochooloo.util.network.request.GetFactsForCountryRequest;
 import com.xtronlabs.koochooloo.util.network.response_models.Countries;
 import com.xtronlabs.koochooloo.util.network.response_models.Country;
+import com.xtronlabs.koochooloo.util.network.response_models.Facts;
 import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
+import com.xtronlabs.koochooloo.view.KoochoolooLabel;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -54,7 +61,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class HomeFragment extends BaseFragment implements ProcessResponseInterface<Countries>, CountryListAdapter.IShowCountry, TextView.OnEditorActionListener {
+public class HomeFragment extends BaseFragment implements ProcessResponseInterface<Countries>,
+        CountryListAdapter.IShowCountry, TextView.OnEditorActionListener {
 
     private static final String MB_TILES_DIR = "mbtiles";
     private static final String JSON_DIR = "country_json_50m";
@@ -78,6 +86,14 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     ImageButton mImgBtnCustomListClose;
     @BindView(R.id.customListHolder)
     RelativeLayout mCustomListHolder;
+    @BindView(R.id.lblPopUpBubble)
+    KoochoolooLabel mLblPopUpBubble;
+    @BindView(R.id.imgPopUpKoochooloo)
+    ImageView mImgPopUpKoochooloo;
+    @BindView(R.id.imgPopUpClose)
+    ImageButton mImgPopUpClose;
+    @BindView(R.id.popUpHolder)
+    RelativeLayout mPopUpHolder;
 
     /*private ViewGroup mCustomListHolder;
     private RecyclerView mCustomListScrollView;
@@ -123,7 +139,12 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 }
             };
     private boolean isDrawerOpen = false;
+    private boolean isPopUpOpen = false;
     private AlertDialog mNoNetworkDialog;
+    private String mFact;
+    private Country mCountry;
+    private FactsResponseProcessor mFactsResponseProcessor = new FactsResponseProcessor();
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -180,7 +201,6 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             globe.setLayoutParams(lp);
             globe.setPadding(8, 8, 8, 8);
             holder.addView(globe);
-
         }
 
         ViewGroup parent = (ViewGroup) mImgBtnGlobe.getParent();
@@ -255,7 +275,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     }
 
     @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight
-            , R.id.imgBtnCustomListClose})
+            , R.id.imgBtnCustomListClose, R.id.imgPopUpClose})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgBtnGlobe:
@@ -272,6 +292,9 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 break;
             case R.id.imgBtnCustomListClose:
                 animateDrawerClose();
+                break;
+            case R.id.imgPopUpClose:
+                animatePopUpClose();
                 break;
         }
     }
@@ -317,6 +340,32 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         ObjectAnimator.ofFloat(mTxtSearch, "TranslationX", 0, -mCustomListHolder.getWidth())
                 .setDuration(600)
                 .start();
+    }
+
+    //needs clean up here(code repetition)
+    private void animatePopUpOpen() {
+        if (mPopUpHolder == null) return;
+        mPopUpHolder.setVisibility(View.VISIBLE);
+        ObjectAnimator.ofFloat(mPopUpHolder, "TranslationX", -mPopUpHolder.getWidth(), 0)
+                .setDuration(600)
+                .start();
+        isPopUpOpen = true;
+
+    }
+
+    private void animatePopUpClose() {
+        ObjectAnimator.ofFloat(mPopUpHolder, "TranslationX",
+                0, -mPopUpHolder.getWidth())
+                .setDuration(400)
+                .start();
+        isPopUpOpen = false;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(getActivity(), RecipeActivity.class));
+            }
+        },600);
     }
 
     @Override
@@ -368,6 +417,18 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     @Override
     public void showCountry(Country country) {
         if (country == null) return;
+        if (mCountry == null){
+            new GetFactsForCountryRequest(getActivity(),mFactsResponseProcessor,country.id);
+        } else if (!mCountry.id.equals(country.id)){
+            new GetFactsForCountryRequest(getActivity(), mFactsResponseProcessor, country.id);
+        }
+        mCountry = country;
+        if (!isDrawerOpen)
+            animateDrawerClose();
+
+        if (!isPopUpOpen)
+            animatePopUpOpen();
+
         new LoadCountryAsync().execute(country);
     }
 
@@ -432,11 +493,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         @Override
         protected void onPostExecute(VectorObject vectorObject) {
             super.onPostExecute(vectorObject);
-
+            vectorObject.selectable = true;
             mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
-
-            //mGlobeController.animatePositionGeo(-3.6704803, 40.5023056, 5, 1.0);
-            //mGlobeController.animatePositionGeo(vectorObject.getAttributes().getDouble(""));
         }
     }
 
@@ -480,6 +538,18 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             super.onProgressUpdate(values);
             VectorObject object = values[0];
             mGlobeController.addVector(object, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
+        }
+    }
+
+    private class FactsResponseProcessor implements ProcessResponseInterface<Facts> {
+
+        @Override
+        public void processResponse(Facts response) {
+            if (response == null) return;
+            if (!isPopUpOpen) animatePopUpOpen();
+            if (mPopUpHolder == null) return;
+            if (mLblPopUpBubble == null) return;
+            mLblPopUpBubble.setText(response.getFacts().get(0).getFact());
         }
     }
 

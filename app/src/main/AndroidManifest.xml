@@ -20,39 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.Screen_one"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_two"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_three"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_four"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_five"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_six"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_seven"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_eight"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_nine"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_ten"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".activity.Screen_eleven"
-            android:screenOrientation="landscape" />
 
         <service
             android:name=".service.BackgroundMusicService"
@@ -63,7 +30,9 @@
             android:name=".content.KoochoolooContentProvider"
             android:authorities="com.xtronlabs.koochooloo.provider"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <activity android:name=".activity.RecipeActivity"></activity>
     </application>
 
 </manifest>
