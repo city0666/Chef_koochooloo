@@ -1,5 +1,6 @@
 package com.xtronlabs.koochooloo.util.network.response_models;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -11,18 +12,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "type",
-        "text",
-        "updated_at"
+        "image"
 })
-public class Step {
+public class Image {
 
-    @JsonProperty("type")
-    public String type;
-    @JsonProperty("text")
-    public String text;
-    @JsonProperty("updated_at")
-    public String updatedAt;
+    @JsonProperty("image")
+    public String image;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 

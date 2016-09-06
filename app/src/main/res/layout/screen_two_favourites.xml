@@ -41,6 +41,14 @@
         android:text="ALL YOUR FAVORITED RECIPES WILL BE SHOWN HERE AS SOON AS YOU ADD THEM :)"/>
 
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/favList"
+        android:layout_below="@+id/imgBtnGlobe"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/imgBtnSettings"
+        android:layout_height="match_parent"/>
+
+
     <ImageButton style="@style/round_button_style.bottom"
         android:id="@+id/imgBtnSettings"
         android:layout_alignParentBottom="true"

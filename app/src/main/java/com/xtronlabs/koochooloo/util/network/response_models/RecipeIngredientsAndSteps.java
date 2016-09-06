@@ -11,18 +11,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "type",
-        "text",
-        "updated_at"
+        "recipe"
 })
-public class Step {
+public class RecipeIngredientsAndSteps {
 
-    @JsonProperty("type")
-    public String type;
-    @JsonProperty("text")
-    public String text;
-    @JsonProperty("updated_at")
-    public String updatedAt;
+    @JsonProperty("recipe")
+    public Recipe2 recipe;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -37,3 +31,4 @@ public class Step {
     }
 
 }
+

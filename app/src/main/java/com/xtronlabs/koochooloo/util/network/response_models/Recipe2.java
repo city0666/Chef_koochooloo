@@ -1,6 +1,9 @@
 package com.xtronlabs.koochooloo.util.network.response_models;
 
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -11,18 +14,33 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "type",
-        "text",
-        "updated_at"
+        "id",
+        "name",
+        "time",
+        "presentation",
+        "updated_at",
+        "ingredients",
+        "images",
+        "steps"
 })
-public class Step {
+public class Recipe2 {
 
-    @JsonProperty("type")
-    public String type;
-    @JsonProperty("text")
-    public String text;
+    @JsonProperty("id")
+    public Integer id;
+    @JsonProperty("name")
+    public String name;
+    @JsonProperty("time")
+    public String time;
+    @JsonProperty("presentation")
+    public String presentation;
     @JsonProperty("updated_at")
     public String updatedAt;
+    @JsonProperty("ingredients")
+    public List<Ingredient> ingredients = new ArrayList<Ingredient>();
+    @JsonProperty("images")
+    public List<Image> images = new ArrayList<Image>();
+    @JsonProperty("steps")
+    public List<Step> steps = new ArrayList<Step>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -37,3 +55,4 @@ public class Step {
     }
 
 }
+

@@ -7,6 +7,7 @@ import com.xtronlabs.koochooloo.util.network.response_models.Fact;
 import com.xtronlabs.koochooloo.util.network.response_models.Facts;
 import com.xtronlabs.koochooloo.util.network.response_models.Ingredient;
 import com.xtronlabs.koochooloo.util.network.response_models.Recipe;
+import com.xtronlabs.koochooloo.util.network.response_models.RecipeIngredient;
 import com.xtronlabs.koochooloo.util.network.response_models.Recipes;
 
 import retrofit2.Call;
@@ -27,7 +28,7 @@ public interface KoochoolooNetworkInterface {
     Call<Recipe[]> getRecipesForCountry(@Path("id") int id);
 
     @GET("recipes?lang=en&access_token=" + AT)
-    Call<Recipes> getRecipies();
+    Call<RecipeIngredient> getRecipies();
 
     @GET("recipes/{id}?lang=en&access_token=" + AT)
     Call<Recipe[]> getRecipeDetailsFor(@Path("id") int id);

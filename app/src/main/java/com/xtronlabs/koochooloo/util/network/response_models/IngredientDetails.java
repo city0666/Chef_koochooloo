@@ -1,6 +1,5 @@
 package com.xtronlabs.koochooloo.util.network.response_models;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -10,11 +9,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "id",
         "name",
         "tip",
-        "measurement_unit",
-        "quantity"
+        "updated_at"
 })
-@Deprecated
-public class Ingredient {
+public class IngredientDetails {
 
     @JsonProperty("id")
     public Integer id;
@@ -22,9 +19,7 @@ public class Ingredient {
     public String name;
     @JsonProperty("tip")
     public String tip;
-    @JsonProperty("measurement_unit")
-    public String measurementUnit;
-    @JsonProperty("quantity")
-    public Integer quantity;
+    @JsonProperty("updated_at")
+    public String updatedAt;
 
 }

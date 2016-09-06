@@ -37,18 +37,18 @@
 
     <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnSound"
-        android:background="@drawable/done_button"
+        android:background="@drawable/ic_un_mute"
         android:layout_alignParentRight="true"/>
 
 
 
     <ImageButton style="@style/round_button_style.bottom"
-        android:background="@drawable/left_arrow"
+        android:background="@drawable/fav_ion"
         android:id="@+id/imgBottomLeft"
         android:layout_alignParentBottom="true"/>
 
     <ImageButton style="@style/round_button_style.bottom"
-        android:background="@drawable/right_arrow"
+        android:background="@drawable/icon_settings"
         android:id="@+id/imgBottomRight"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>

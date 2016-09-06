@@ -2,6 +2,7 @@ package com.xtronlabs.koochooloo.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     private List<Recipe> mRecipesList;
     private Context mContext;
+    private AlertDialog mAlertDialog;
 
     public RecipeListAdapter(List<Recipe> mRecipesList, Context mContext) {
         this.mRecipesList = mRecipesList;
@@ -97,9 +99,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             btnCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if (mAlertDialog != null){
+                        mAlertDialog.dismiss();
+                    }
                 }
             });
+
+            mAlertDialog = new AlertDialog.Builder(mContext)
+                    .setView(v)
+                    .setCancelable(false)
+                    .show();
 
         }
     }

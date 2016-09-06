@@ -37,6 +37,7 @@ import com.mousebird.maply.SelectedObject;
 import com.mousebird.maply.VectorInfo;
 import com.mousebird.maply.VectorObject;
 import com.xtronlabs.koochooloo.R;
+import com.xtronlabs.koochooloo.activity.FavoritesActivity;
 import com.xtronlabs.koochooloo.activity.RecipeActivity;
 import com.xtronlabs.koochooloo.adapter.CountryListAdapter;
 import com.xtronlabs.koochooloo.util.M;
@@ -304,7 +305,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     }
 
     private void handleLeftNavigation() {
-
+        startActivity(new Intent(getActivity(), FavoritesActivity.class));
     }
 
     private void handleRightNavigation() {

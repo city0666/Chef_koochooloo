@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ImageButton
+        android:id="@+id/imgBtnGlobe"
+        style="@style/round_button_style.top"
+        android:background="@drawable/icon_globe" />
+
+    <TextView
+        android:id="@+id/lblSelectedRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgBtnGlobe"
+        android:layout_marginTop="@dimen/our_activity_horizontal_margin"
+        android:layout_toEndOf="@+id/imgBtnGlobe"
+        android:layout_toRightOf="@+id/imgBtnGlobe"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/imgBtnSound"
+        style="@style/round_button_style.top"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/done_button" />
+
+
+    <LinearLayout
+        android:id="@+id/imageHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/imgBottomLeft"
+        android:layout_below="@+id/imgBtnGlobe"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_vertical_margin">
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/background_list_ingredients"
+            android:paddingBottom="25dp"
+            android:paddingLeft="35dp"
+            android:paddingRight="20dp"
+            android:paddingTop="50dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ingredientsList"
+                style="@style/scrollbar_shape_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="@dimen/our_activity_horizontal_margin"
+            android:layout_height="1dp" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/frame">
+
+            <ImageView
+                android:id="@+id/imgRecipeImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="30dp" />
+
+
+            <ImageButton
+                android:id="@+id/imgBtnRecipeImageLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/arrow_left_disabled" />
+
+            <ImageButton
+                android:id="@+id/imgBtnRecipeImageRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/arrow_right_enabled" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/toolsHolder"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/imgBottomRight"
+        android:layout_toRightOf="@+id/imgBottomLeft"
+        android:background="@drawable/background_list_tools">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ingredientToolsList"
+            android:layout_marginLeft="45dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="35dp"
+            style="@style/scrollbar_shape_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+
+    <ImageButton
+        android:id="@+id/imgBottomLeft"
+        style="@style/round_button_style.bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/left_arrow" />
+
+    <ImageButton
+        android:id="@+id/imgBottomRight"
+        style="@style/round_button_style.bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/right_arrow" />
+
+</RelativeLayout>

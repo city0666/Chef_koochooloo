@@ -11,16 +11,25 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "type",
-        "text",
+        "id",
+        "name",
+        "tip",
+        "measurement_unit",
+        "quantity",
         "updated_at"
 })
-public class Step {
+public class Ingredient2 {
 
-    @JsonProperty("type")
-    public String type;
-    @JsonProperty("text")
-    public String text;
+    @JsonProperty("id")
+    public Integer id;
+    @JsonProperty("name")
+    public String name;
+    @JsonProperty("tip")
+    public String tip;
+    @JsonProperty("measurement_unit")
+    public String measurementUnit;
+    @JsonProperty("quantity")
+    public Integer quantity;
     @JsonProperty("updated_at")
     public String updatedAt;
     @JsonIgnore
@@ -37,3 +46,4 @@ public class Step {
     }
 
 }
+
