@@ -7,6 +7,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <include layout="@layout/extra_social_media"/>
+    <include layout="@layout/extra_settings"/>
+
     <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnGlobe"
         android:background="@drawable/icon_globe"/>
@@ -18,8 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imgBtnGlobe"
-        android:layout_toRightOf="@+id/imgBtnGlobe"
-        android:layout_toEndOf="@+id/imgBtnGlobe"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/our_activity_horizontal_margin" />
 
 
@@ -35,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/our_activity_horizontal_margin"
+        android:gravity="center_horizontal"
         android:layout_marginRight="@dimen/our_activity_horizontal_margin"
         android:textStyle="bold"
         android:textSize="25sp"
@@ -45,6 +48,10 @@
         android:id="@+id/favList"
         android:layout_below="@+id/imgBtnGlobe"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         android:layout_above="@+id/imgBtnSettings"
         android:layout_height="match_parent"/>
 
@@ -55,10 +62,31 @@
         android:background="@drawable/icon_settings"/>
 
 
-    <ImageButton style="@style/round_button_style.bottom"
+    <!--<ImageButton style="@style/round_button_style.bottom"
         android:id="@+id/imgBtnStar"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/icon_favorites"/>
+        android:background="@drawable/icon_favorites"/>-->
+
+
+    <EditText
+        android:id="@+id/txtSearch"
+        android:paddingLeft="30dp"
+        android:visibility="gone"
+        android:layout_width="200dp"
+        android:imeOptions="actionSearch"
+        android:background="@drawable/search_bg"
+        android:inputType="text"
+        android:layout_alignBottom="@+id/imgBtnGlobe"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imgBtnGlobe"
+        android:layout_alignStart="@+id/imgBtnGlobe"/>
+
+
+    <include layout="@layout/include_custom_list"/>
+    <include layout="@layout/extra_fact_pop_up"/>
+
 
 </RelativeLayout>

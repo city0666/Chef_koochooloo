@@ -110,28 +110,31 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 @Override
                 public void userDidSelect(GlobeController globeController, SelectedObject[] selectedObjects,
                                           Point2d point2d, Point2d point2d1) {
-
+                    hideDrawerAndPopUp();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            showRecipeActivity();
+                        }
+                    }, 600);
                 }
 
                 @Override
                 public void userDidTap(GlobeController globeController, Point2d point2d, Point2d point2d1) {
-
+                    hideDrawerAndPopUp();
                 }
 
                 @Override
                 public void userDidLongPress(GlobeController globeController, SelectedObject[] selectedObjects,
                                              Point2d point2d, Point2d point2d1) {
-
                 }
 
                 @Override
                 public void globeDidStartMoving(GlobeController globeController, boolean b) {
-
                 }
 
                 @Override
                 public void globeDidStopMoving(GlobeController globeController, Point3d[] point3ds, boolean b) {
-
                 }
 
                 @Override
@@ -139,6 +142,12 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
 
                 }
             };
+
+    private void hideDrawerAndPopUp() {
+        if (isDrawerOpen) animateDrawerClose();
+        if (isPopUpOpen) animatePopUpClose();
+    }
+
     private boolean isDrawerOpen = false;
     private boolean isPopUpOpen = false;
     private AlertDialog mNoNetworkDialog;
@@ -204,15 +213,16 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             holder.addView(globe);
         }
 
+        mGlobeController.setZoomLimits(1,1);
         ViewGroup parent = (ViewGroup) mImgBtnGlobe.getParent();
         int index = parent.indexOfChild(mCustomListHolder);
         parent.bringChildToFront(parent.getChildAt(index));
-        index = parent.indexOfChild(mTxtSearch);
-        parent.bringChildToFront(parent.getChildAt(index));
         index = parent.indexOfChild(mImgBtnGlobe);
         parent.bringChildToFront(parent.getChildAt(index));
-        mGlobeController.getGlobeView().currentMapScale(0.9f, 0.9f);
-        mGlobeController.setZoomLimits(0.5f, 0.5f);
+        index = parent.indexOfChild(mTxtSearch);
+        parent.bringChildToFront(parent.getChildAt(index));
+        //mGlobeController.getGlobeView().currentMapScale(0.9f, 0.9f);
+        //mGlobeController.setZoomLimits(0.5f, 0.5f);
 
         if (mTxtSearch != null) {
             mTxtSearch.setOnEditorActionListener(this);
@@ -233,6 +243,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 }
             }
         });
+        mGlobeController.getGlobeView().animate();
     }
 
     private void setupGlobe(GlobeController globeController) throws Exception {
@@ -278,6 +289,10 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight
             , R.id.imgBtnCustomListClose, R.id.imgPopUpClose})
     public void onClick(View view) {
+
+        if (isPopUpOpen) animatePopUpClose();
+        if (isDrawerOpen) animateDrawerClose();
+
         switch (view.getId()) {
             case R.id.imgBtnGlobe:
                 toggleDrawerAndSearch();
@@ -296,8 +311,23 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 break;
             case R.id.imgPopUpClose:
                 animatePopUpClose();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showRecipeActivity();
+                    }
+                }, 600);
                 break;
         }
+    }
+
+    private void showRecipeActivity() {
+        int countryId = 0;
+        if (mCountry != null) countryId = mCountry.id;
+        Intent recipeIntent = new Intent(getActivity(), RecipeActivity.class);
+        recipeIntent.putExtra(RecipeActivity.COUNTRY_ID, countryId);
+        M.log("cid",mCountry.id+"");
+        startActivity(recipeIntent);
     }
 
     private void manageSound() {
@@ -319,6 +349,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
 
     private void animateDrawerOpen() {
         if (mCustomListHolder == null) return;
+        if (mImgBtnGlobe != null) mImgBtnGlobe.setVisibility(View.INVISIBLE);
         mCustomListHolder.setVisibility(View.VISIBLE);
         mTxtSearch.setVisibility(View.VISIBLE);
         ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX", -mCustomListHolder.getWidth(), 0)
@@ -333,6 +364,9 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     }
 
     private void animateDrawerClose() {
+
+        if (mImgBtnGlobe != null) mImgBtnGlobe.setVisibility(View.VISIBLE);
+
         ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX",
                 0, -mCustomListHolder.getWidth())
                 .setDuration(400)
@@ -346,6 +380,10 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     //needs clean up here(code repetition)
     private void animatePopUpOpen() {
         if (mPopUpHolder == null) return;
+        animateDrawerClose();
+        ViewGroup parent = (ViewGroup) mImgBtnGlobe.getParent();
+        int index = parent.indexOfChild(mPopUpHolder);
+        parent.bringChildToFront(parent.getChildAt(index));
         mPopUpHolder.setVisibility(View.VISIBLE);
         ObjectAnimator.ofFloat(mPopUpHolder, "TranslationX", -mPopUpHolder.getWidth(), 0)
                 .setDuration(600)
@@ -360,13 +398,6 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 .setDuration(400)
                 .start();
         isPopUpOpen = false;
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(getActivity(), RecipeActivity.class));
-            }
-        },600);
     }
 
     @Override
@@ -418,9 +449,9 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     @Override
     public void showCountry(Country country) {
         if (country == null) return;
-        if (mCountry == null){
-            new GetFactsForCountryRequest(getActivity(),mFactsResponseProcessor,country.id);
-        } else if (!mCountry.id.equals(country.id)){
+        if (mCountry == null) {
+            new GetFactsForCountryRequest(getActivity(), mFactsResponseProcessor, country.id);
+        } else if (!mCountry.id.equals(country.id)) {
             new GetFactsForCountryRequest(getActivity(), mFactsResponseProcessor, country.id);
         }
         mCountry = country;
@@ -499,49 +530,6 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         }
     }
 
-    @Deprecated
-    private class LoadCountryBoundariesAsync extends AsyncTask<Void, VectorObject, Void> {
-
-
-        VectorInfo vectorInfo = new VectorInfo();
-
-        public LoadCountryBoundariesAsync() {
-            vectorInfo.setColor(R.color.colorAccent);
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                String[] files = getActivity().getAssets().list(JSON_DIR);
-                if (files == null) return null;
-                if (files.length <= 0) return null;
-                for (String s : files) {
-                    InputStream is = getActivity().getAssets().open(JSON_DIR + "/" + s);
-                    int size = is.available();
-                    byte[] contents = new byte[size];
-                    is.read(contents);
-                    String json = new String(contents, "UTF-8");
-                    if (json != null) {
-                        VectorObject vectorObject = new VectorObject();
-                        vectorObject.fromGeoJSON(json);
-                        publishProgress(vectorObject);
-                    }
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(VectorObject... values) {
-            super.onProgressUpdate(values);
-            VectorObject object = values[0];
-            mGlobeController.addVector(object, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
-        }
-    }
-
     private class FactsResponseProcessor implements ProcessResponseInterface<Facts> {
 
         @Override
@@ -550,6 +538,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             if (!isPopUpOpen) animatePopUpOpen();
             if (mPopUpHolder == null) return;
             if (mLblPopUpBubble == null) return;
+            if(response.getFacts().size()<=0) return;
             mLblPopUpBubble.setText(response.getFacts().get(0).getFact());
         }
     }

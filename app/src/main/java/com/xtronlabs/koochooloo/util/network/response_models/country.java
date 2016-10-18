@@ -14,7 +14,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "population",
         "national_dish",
         "country_image",
-        "country_flag"
+        "country_flag",
+        "updated_at"
 })
 public class Country {
 
@@ -34,6 +35,8 @@ public class Country {
     public String countryImage;
     @JsonProperty("country_flag")
     public String countryFlag;
+    @JsonProperty("updated_at")
+    public String updated_at;
 
 }
 

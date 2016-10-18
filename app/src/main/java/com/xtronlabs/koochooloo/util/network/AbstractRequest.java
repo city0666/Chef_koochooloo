@@ -17,18 +17,18 @@ public abstract class AbstractRequest {
     protected final Context mContext;
     protected KoochoolooNetworkInterface mNetworkInterface;
 
-    public AbstractRequest(Context mContext) {
-        this.mContext = mContext;
+    public AbstractRequest(Context context) {
+        mContext = context;
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build();
 
-        Retrofit mRetrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URI)
                 .client(okHttpClient)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
-        mNetworkInterface = mRetrofit.create(KoochoolooNetworkInterface.class);
+        mNetworkInterface = retrofit.create(KoochoolooNetworkInterface.class);
     }
 }

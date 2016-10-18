@@ -25,7 +25,7 @@ public interface KoochoolooNetworkInterface {
     Call<Facts> getFactForCountry(@Path("id") int id);
 
     @GET("countries/{id}/recipes?lang=en&access_token=" + AT)
-    Call<Recipe[]> getRecipesForCountry(@Path("id") int id);
+    Call<Recipes> getRecipesForCountry(@Path("id") int id);
 
     @GET("recipes?lang=en&access_token=" + AT)
     Call<RecipeIngredient> getRecipies();

@@ -27,13 +27,14 @@
         android:paddingLeft="30dp"
         android:layout_width="200dp"
         android:imeOptions="actionSearch"
+        android:background="@drawable/search_bg"
         android:inputType="text"
-        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imgBtnGlobe"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/imgBtnGlobe"
-        android:layout_alignStart="@+id/imgBtnGlobe"
-        android:layout_marginLeft="27dp"
-        android:layout_marginStart="27dp" />
+        android:layout_alignStart="@+id/imgBtnGlobe"/>
 
     <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnSound"

@@ -5,12 +5,25 @@
     android:visibility="gone"
     android:layout_height="match_parent">
 
-    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lblPopUpBubble"
+        android:padding="@dimen/our_activity_horizontal_margin"
         android:layout_above="@+id/space"
-        android:background="@drawable/speach_bubble" />
+        android:background="@drawable/speach_bubble_down_new"
+        android:layout_alignRight="@+id/space">
+
+        <com.xtronlabs.koochooloo.view.KoochoolooLabel
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblPopUpBubble"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </ScrollView>
+
+
 
     <android.support.v4.widget.Space
         android:id="@+id/space"

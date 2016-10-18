@@ -70,15 +70,15 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         ImageView mImgRecipeItemImage;
         @BindView(R.id.recipeItemTitle)
         KoochoolooLabel mRecipeItemTitle;
-        @BindView(R.id.imgRecipeItemRemove)
-        ImageButton mImgRecipeItemRemove;
+        /*@BindView(R.id.imgRecipeItemRemove)
+        ImageButton mImgRecipeItemRemove;*/
 
         public RecipeListViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        @OnClick(R.id.imgRecipeItemRemove)
+        /*@OnClick(R.id.imgRecipeItemRemove)
         public void onClick() {
             View v = LayoutInflater.from(mContext).inflate(R.layout.screen_four_dialog,null, false);
             if (v == null) return;
@@ -110,6 +110,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                     .setCancelable(false)
                     .show();
 
-        }
+        }*/
     }
 }
