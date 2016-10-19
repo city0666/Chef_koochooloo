@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mousebird.maply.AttrDictionary;
 import com.mousebird.maply.GlobeController;
 import com.mousebird.maply.MBTiles;
 import com.mousebird.maply.MBTilesImageSource;
@@ -525,6 +526,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         @Override
         protected void onPostExecute(VectorObject vectorObject) {
             super.onPostExecute(vectorObject);
+            AttrDictionary x = vectorObject.getAttributes();
+            vectorInfo.setLineWidth(3f);
             vectorObject.selectable = true;
             mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
         }
