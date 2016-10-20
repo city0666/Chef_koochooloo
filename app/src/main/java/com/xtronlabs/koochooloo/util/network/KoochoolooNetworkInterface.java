@@ -13,29 +13,37 @@ import com.xtronlabs.koochooloo.util.network.response_models.Recipes;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface KoochoolooNetworkInterface {
 
     String AT = "24df4bb0f01e43f91c55a259fcc01212";
 
-    @GET("countries?lang=en&access_token=" + AT)
+    //@GET("countries?lang=en&access_token=" + AT)
+    @GET("countries.php")
     Call<Countries> getCountries();
 
-    @GET("countries/{id}/facts?lang=en&access_token=" + AT)
-    Call<Facts> getFactForCountry(@Path("id") int id);
+    //@GET("countries/{id}/facts?lang=en&access_token=" + AT)
+    @GET("countriesfacts.php")
+    Call<Facts> getFactForCountry(@Query("id") int id);
 
-    @GET("countries/{id}/recipes?lang=en&access_token=" + AT)
-    Call<Recipes> getRecipesForCountry(@Path("id") int id);
+    //@GET("countries/{id}/recipes?lang=en&access_token=" + AT)
+    @GET("countriesrecipes.php")
+    Call<Recipes> getRecipesForCountry(@Query("id") int id);
 
-    @GET("recipes?lang=en&access_token=" + AT)
+    //@GET("recipes?lang=en&access_token=" + AT)
+    @GET("recipes.php")
     Call<RecipeIngredient> getRecipies();
 
-    @GET("recipes/{id}?lang=en&access_token=" + AT)
-    Call<Recipe[]> getRecipeDetailsFor(@Path("id") int id);
+    //@GET("recipes/{id}?lang=en&access_token=" + AT)
+    @GET("recipesid.php")
+    Call<Recipe[]> getRecipeDetailsFor(@Query("id") int id);
 
-    @GET("ingredients/?lang=en&access_token=" + AT)
+    //@GET("ingredients/?lang=en&access_token=" + AT)
+    @GET("ingredients.php")
     Call<Ingredient[]> getIngredients();
 
-    @GET("ingredients/{id}?lang=en&access_token=" + AT)
-    Call<Ingredient[]> getIngredientAndTips(@Path("id") int id);
+    //@GET("ingredients/{id}?lang=en&access_token=" + AT)
+    @GET("ingredients.php")
+    Call<Ingredient[]> getIngredientAndTips(@Query("id") int id);
 }

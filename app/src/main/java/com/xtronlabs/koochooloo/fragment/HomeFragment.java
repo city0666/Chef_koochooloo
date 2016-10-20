@@ -28,14 +28,17 @@ import android.widget.TextView;
 
 import com.mousebird.maply.AttrDictionary;
 import com.mousebird.maply.GlobeController;
+import com.mousebird.maply.LabelInfo;
 import com.mousebird.maply.MBTiles;
 import com.mousebird.maply.MBTilesImageSource;
 import com.mousebird.maply.MaplyBaseController;
 import com.mousebird.maply.Point2d;
 import com.mousebird.maply.Point3d;
 import com.mousebird.maply.QuadImageTileLayer;
+import com.mousebird.maply.ScreenLabel;
 import com.mousebird.maply.SelectedObject;
 import com.mousebird.maply.VectorInfo;
+import com.mousebird.maply.VectorIterator;
 import com.mousebird.maply.VectorObject;
 import com.xtronlabs.koochooloo.R;
 import com.xtronlabs.koochooloo.activity.FavoritesActivity;
@@ -50,6 +53,10 @@ import com.xtronlabs.koochooloo.util.network.response_models.Country;
 import com.xtronlabs.koochooloo.util.network.response_models.Facts;
 import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
 import com.xtronlabs.koochooloo.view.KoochoolooLabel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -214,7 +221,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             holder.addView(globe);
         }
 
-        mGlobeController.setZoomLimits(1,1);
+        mGlobeController.setZoomLimits(1, 1);
         ViewGroup parent = (ViewGroup) mImgBtnGlobe.getParent();
         int index = parent.indexOfChild(mCustomListHolder);
         parent.bringChildToFront(parent.getChildAt(index));
@@ -327,7 +334,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         if (mCountry != null) countryId = mCountry.id;
         Intent recipeIntent = new Intent(getActivity(), RecipeActivity.class);
         recipeIntent.putExtra(RecipeActivity.COUNTRY_ID, countryId);
-        M.log("cid",mCountry.id+"");
+        M.log("cid", mCountry.id + "");
         startActivity(recipeIntent);
     }
 
@@ -495,7 +502,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
 
 
         VectorInfo vectorInfo = new VectorInfo();
-
+        JSONObject jsonObject;
         public LoadCountryAsync() {
             vectorInfo.setColor(R.color.colorAccent);
         }
@@ -530,6 +537,19 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             vectorInfo.setLineWidth(3f);
             vectorObject.selectable = true;
             mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
+            LabelInfo labelInfo = new LabelInfo();
+            labelInfo.setFontSize(35f);
+            labelInfo.setTextColor(R.color.colorPrimary);
+
+            //need to add animate to position geo
+            //insufficient documentation / no reference code
+            //Need to go through the IOS source code for the logic(only hope to get it right)
+
+            ScreenLabel screenLabel = new ScreenLabel();
+            screenLabel.loc = vectorObject.centroid();
+            String name = x.getString("ADMIN");
+            screenLabel.text = name == null ? "NO name" : name;
+            mGlobeController.addScreenLabel(screenLabel, labelInfo, MaplyBaseController.ThreadMode.ThreadAny);
         }
     }
 
@@ -541,7 +561,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             if (!isPopUpOpen) animatePopUpOpen();
             if (mPopUpHolder == null) return;
             if (mLblPopUpBubble == null) return;
-            if(response.getFacts().size()<=0) return;
+            if (response.getFacts().size() <= 0) return;
             mLblPopUpBubble.setText(response.getFacts().get(0).getFact());
         }
     }
