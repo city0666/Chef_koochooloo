@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.Space;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,6 +44,7 @@ import com.mousebird.maply.SelectedObject;
 import com.mousebird.maply.VectorInfo;
 import com.mousebird.maply.VectorObject;
 import com.xtronlabs.koochooloo.R;
+import com.xtronlabs.koochooloo.activity.CountryDetailsActivity;
 import com.xtronlabs.koochooloo.activity.FavoritesActivity;
 import com.xtronlabs.koochooloo.activity.RecipeActivity;
 import com.xtronlabs.koochooloo.adapter.CountryListAdapter;
@@ -125,6 +127,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     RelativeLayout mLtSettingsContainer;
     @BindView(R.id.space)
     Space mSpace;
+    @BindView(R.id.contentLoadingProgress)
+    ContentLoadingProgressBar mContentLoadingProgress;
 
     /*private ViewGroup mCustomListHolder;
     private RecyclerView mCustomListScrollView;
@@ -381,8 +385,10 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     private void showCountryDetails() {
         int countryId = 0;
         if (mCountry != null) countryId = mCountry.id;
-        Intent countryIntent = new Intent(getActivity(), RecipeActivity.class);
+        Intent countryIntent = new Intent(getActivity(), CountryDetailsActivity.class);
         countryIntent.putExtra(RecipeActivity.COUNTRY_ID, countryId);
+        countryIntent.putExtra(CountryDetailsActivity.COUNTRY_FLAG_LINK, mCountry.countryFlag);
+        countryIntent.putExtra(CountryDetailsActivity.COUNTRY_NAME, mCountry.name);
         M.log("cid", mCountry.id + "");
         startActivity(countryIntent);
     }
@@ -408,13 +414,18 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     }
 
     private void toggleDrawerAndSearch() {
-        if (isDrawerOpen) animateDrawerClose();
-        else animateDrawerOpen();
+        if (isDrawerOpen) {
+            animateDrawerClose();
+        } else {
+            animateDrawerOpen();
+        }
+
     }
 
     private void animateDrawerOpen() {
         if (mCustomListHolder == null) return;
         if (mImgBtnGlobe != null) mImgBtnGlobe.setVisibility(View.INVISIBLE);
+        if (mImgBtnSettings != null) mImgBtnSettings.setVisibility(View.INVISIBLE);
         mCustomListHolder.setVisibility(View.VISIBLE);
         mTxtSearch.setVisibility(View.VISIBLE);
         ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX", -mCustomListHolder.getWidth(), 0)
@@ -431,6 +442,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     private void animateDrawerClose() {
 
         if (mImgBtnGlobe != null) mImgBtnGlobe.setVisibility(View.VISIBLE);
+        if (mImgBtnSettings != null) mImgBtnSettings.setVisibility(View.VISIBLE);
 
         ObjectAnimator.ofFloat(mCustomListHolder, "TranslationX",
                 0, -mCustomListHolder.getWidth())
@@ -504,6 +516,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         if (response == null) return;
 
         M.log("CALL", "Response from get countries request : response status = " + response.countries.size());
+        mContentLoadingProgress.hide();
         mCountryListAdapter = new CountryListAdapter(response.countries, getActivity(), this);
         mCountriesList.setAdapter(mCountryListAdapter);
         mCountriesList.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -11,7 +11,7 @@ import android.widget.Button;
 import com.xtronlabs.koochooloo.R;
 import com.xtronlabs.koochooloo.fragment.HomeFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String FRAGMENT_TAG = "fragmentMain";
 

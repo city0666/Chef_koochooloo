@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.xtronlabs.koochooloo.R;
 import com.xtronlabs.koochooloo.fragment.FavoritesFragment;
 
-public class FavoritesActivity extends AppCompatActivity {
+public class FavoritesActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

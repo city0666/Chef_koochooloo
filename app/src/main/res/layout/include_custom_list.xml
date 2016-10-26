@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/customListHolder"
     android:minWidth="250dp"
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:layout_marginTop="62dp"
-    android:visibility="gone"
     android:background="@drawable/background_brown_9"
     android:padding="@dimen/our_activity_horizontal_margin">
 
@@ -29,6 +29,14 @@
         android:layout_toEndOf="@+id/countryList"
         android:layout_marginLeft="-20dp"/>
 
+
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:layout_centerInParent="true"
+        android:id="@+id/contentLoadingProgress"
+        android:layout_width="30dp"
+        android:indeterminate="true"
+        android:indeterminateBehavior="repeat"
+        android:layout_height="30dp" />
 
 
 </RelativeLayout>

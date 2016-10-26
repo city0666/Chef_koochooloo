@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.xtronlabs.koochooloo.R;
 import com.xtronlabs.koochooloo.fragment.RecipeFragment;
 
-public class RecipeActivity extends AppCompatActivity {
+public class RecipeActivity extends BaseActivity {
 
     public static final String COUNTRY_ID = "countryID";
 
