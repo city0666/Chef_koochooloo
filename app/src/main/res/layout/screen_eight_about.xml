@@ -24,7 +24,7 @@
         android:layout_margin="@dimen/our_activity_horizontal_margin"
         android:background="@drawable/cooking_step_background_little_chef"
         android:padding="@dimen/our_activity_horizontal_margin"
-        android:layout_above="@+id/imgBottomLeft"
+        android:layout_above="@+id/imgBtnSettings"
         android:layout_height="match_parent">
 
         <ScrollView
@@ -50,12 +50,12 @@
 
     <ImageButton style="@style/round_button_style.bottom"
         android:background="@drawable/icon_settings"
-        android:id="@+id/imgBottomLeft"
+        android:id="@+id/imgBtnSettings"
         android:layout_alignParentBottom="true"/>
 
     <ImageButton style="@style/round_button_style.bottom"
         android:background="@drawable/icon_favorites"
-        android:id="@+id/imgBottomRight"
+        android:id="@+id/imgBtnFavorites"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 

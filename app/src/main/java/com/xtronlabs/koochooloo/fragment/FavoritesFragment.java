@@ -81,7 +81,6 @@ public class FavoritesFragment extends Fragment implements ProcessResponseInterf
     Space mSpace;
     private boolean isDrawerOpen;
     private boolean isPopUpOpen;
-    private boolean isSocialMediaOpen;
     private boolean isSettingsOpen;
 
     private int screenHeight;

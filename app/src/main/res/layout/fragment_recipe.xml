@@ -38,13 +38,13 @@
 
 
     <ImageButton
-        android:id="@+id/imgBottomLeft"
+        android:id="@+id/imgBtnSettings"
         style="@style/round_button_style.bottom"
         android:layout_alignParentBottom="true"
         android:background="@drawable/left_arrow" />
 
     <ImageButton
-        android:id="@+id/imgBottomRight"
+        android:id="@+id/imgBtnFavorites"
         style="@style/round_button_style.bottom"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

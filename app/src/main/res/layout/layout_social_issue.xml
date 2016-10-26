@@ -11,8 +11,8 @@
         android:layout_height="250dp"
         android:src="@drawable/chef_male"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/imgBottomRight"
-        android:layout_alignEnd="@+id/imgBottomRight" />
+        android:layout_alignRight="@+id/imgBtnFavorites"
+        android:layout_alignEnd="@+id/imgBtnFavorites" />
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:layout_width="wrap_content"
@@ -33,8 +33,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/take_action"
         android:layout_below="@+id/view"
-        android:layout_toRightOf="@+id/imgBottomLeft"
-        android:layout_toEndOf="@+id/imgBottomLeft" />
+        android:layout_toRightOf="@+id/imgBtnSettings"
+        android:layout_toEndOf="@+id/imgBtnSettings" />
 
     <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnGlobe"
@@ -62,12 +62,12 @@
 
     <ImageButton style="@style/round_button_style.bottom"
         android:background="@drawable/left_arrow"
-        android:id="@+id/imgBottomLeft"
+        android:id="@+id/imgBtnSettings"
         android:layout_alignParentBottom="true"/>
 
     <ImageButton style="@style/round_button_style.bottom"
         android:background="@drawable/right_arrow"
-        android:id="@+id/imgBottomRight"
+        android:id="@+id/imgBtnFavorites"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 

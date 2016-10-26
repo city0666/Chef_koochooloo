@@ -14,7 +14,7 @@
         android:id="@+id/imgBtnGlobe"
         android:background="@drawable/icon_globe"/>
 
-    <TextView
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:text="FAVORITES"
         android:textSize="24sp"
         android:textStyle="bold"

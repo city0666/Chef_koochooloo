@@ -1,82 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_marginLeft="14dp"
     android:id="@+id/ltSettingsContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:visibility="gone"
     android:layout_alignParentBottom="true"
-    android:layout_height="wrap_content">
+    android:layout_marginLeft="14dp">
 
     <View
         android:id="@+id/iconBg"
-        android:layout_width="60dp"
-        android:layout_height="250dp"
+        android:layout_width="50dp"
+        android:layout_height="260dp"
         android:background="@drawable/settings_bg" />
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:id="@+id/lblSettingsAllergens"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="-50dp"
         android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/iconBg"
         android:drawableLeft="@drawable/ic_home_settings_menu"
-        android:drawablePadding="20dp"
-        android:gravity="center_vertical"
         android:text="Allergens"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        style="@style/settings_label_style" />
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:id="@+id/lblSettingsTutorial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/lblSettingsAllergens"
-        android:layout_marginLeft="-50dp"
-        android:layout_toRightOf="@+id/iconBg"
         android:drawableLeft="@drawable/ic_home_settings_play"
-        android:drawablePadding="20dp"
-        android:gravity="center_vertical"
         android:text="Tutorial"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        style="@style/settings_label_style" />
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:id="@+id/lblSettingsSupport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/lblSettingsTutorial"
-        android:layout_marginLeft="-50dp"
-        android:layout_toRightOf="@+id/iconBg"
         android:drawableLeft="@drawable/ic_home_settings_help"
-        android:drawablePadding="20dp"
-        android:gravity="center_vertical"
         android:text="Support"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        style="@style/settings_label_style" />
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:id="@+id/lblSettingsAbout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/lblSettingsSupport"
-        android:layout_marginLeft="-50dp"
-        android:layout_toRightOf="@+id/iconBg"
         android:drawableLeft="@drawable/ic_home_settings_info"
-        android:drawablePadding="20dp"
-        android:gravity="center_vertical"
         android:text="About"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        style="@style/settings_label_style" />
 
     <ImageButton
-        android:background="@drawable/ic_home_settings_mute"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/lblSettingsAbout"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="@dimen/default_gap"/>
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="@dimen/default_gap"
+        android:background="@drawable/ic_home_settings_mute" />
 
 
 </RelativeLayout>

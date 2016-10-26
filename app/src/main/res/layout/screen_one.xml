@@ -37,16 +37,16 @@
         android:layout_below="@+id/imgBtnSound"
         android:layout_marginLeft="@dimen/our_activity_horizontal_margin"
         android:layout_marginRight="@dimen/our_activity_horizontal_margin"
-        android:layout_above="@+id/imgBottomLeft"/>
+        android:layout_above="@+id/imgBtnSettings"/>
 
     <ImageButton style="@style/round_button_style.bottom"
         android:background="@drawable/left_arrow"
-        android:id="@+id/imgBottomLeft"
+        android:id="@+id/imgBtnSettings"
         android:layout_alignParentBottom="true"/>
 
     <ImageButton style="@style/round_button_style.bottom"
         android:background="@drawable/right_arrow"
-        android:id="@+id/imgBottomRight"
+        android:id="@+id/imgBtnFavorites"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 
@@ -59,8 +59,8 @@
         android:layout_marginBottom="@dimen/our_activity_horizontal_margin"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_toRightOf="@+id/imgBottomLeft"
-        android:layout_toLeftOf="@+id/imgBottomRight"
+        android:layout_toRightOf="@+id/imgBtnSettings"
+        android:layout_toLeftOf="@+id/imgBtnFavorites"
         android:background="@drawable/bcakground_wide"
         android:textColor="#464545"
         android:maxHeight="50dp"

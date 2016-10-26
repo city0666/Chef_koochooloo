@@ -26,14 +26,17 @@ public class KoochoolooLabel extends TextView {
     }
 
     protected void init(Context c){
-        TypedArray ta = c.obtainStyledAttributes(R.styleable.KoochoolooLabel);
+        /*TypedArray ta = c.obtainStyledAttributes(R.styleable.KoochoolooLabel);
         try {
             String font = ta.getString(R.styleable.KoochoolooLabel_customFont);
             if (font != null)
                 setTypeface(TypefaceUtil.get(c, font));
         } finally {
             ta.recycle();
-        }
+        }*/
+
+        setTypeface(TypefaceUtil.get(c,"font.ttf"));
+
     }
 
 }

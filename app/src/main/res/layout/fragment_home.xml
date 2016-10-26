@@ -7,6 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/extra_social_media"/>
+
+
+    <include layout="@layout/extra_settings" />
+
+
     <ImageButton style="@style/round_button_style.top"
         android:id="@+id/imgBtnGlobe"
         android:background="@drawable/icon_globe"/>
@@ -18,8 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imgBtnGlobe"
-        android:layout_toRightOf="@+id/imgBtnGlobe"
-        android:layout_toEndOf="@+id/imgBtnGlobe"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/our_activity_horizontal_margin" />
 
     <EditText
@@ -44,13 +49,13 @@
 
 
     <ImageButton style="@style/round_button_style.bottom"
-        android:background="@drawable/fav_ion"
-        android:id="@+id/imgBottomLeft"
+        android:background="@drawable/icon_settings"
+        android:id="@+id/imgBtnSettings"
         android:layout_alignParentBottom="true"/>
 
     <ImageButton style="@style/round_button_style.bottom"
-        android:background="@drawable/icon_settings"
-        android:id="@+id/imgBottomRight"
+        android:background="@drawable/fav_ion"
+        android:id="@+id/imgBtnFavorites"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 

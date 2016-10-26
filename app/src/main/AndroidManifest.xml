@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,9 +27,21 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".activity.RecipeActivity" android:screenOrientation="landscape"/>
-        <activity android:name=".activity.RecipeDetailsActivity" android:screenOrientation="landscape"/>
-        <activity android:name=".activity.FavoritesActivity" android:screenOrientation="landscape"/>
+        <activity
+            android:name=".activity.RecipeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.RecipeDetailsActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.FavoritesActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.CountryDetailsActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

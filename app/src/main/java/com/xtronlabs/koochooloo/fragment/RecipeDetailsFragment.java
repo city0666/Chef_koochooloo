@@ -2,7 +2,6 @@ package com.xtronlabs.koochooloo.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,9 +42,9 @@ public class RecipeDetailsFragment extends Fragment {
     RecyclerView mIngredientToolsList;
     @BindView(R.id.toolsHolder)
     FrameLayout mToolsHolder;
-    @BindView(R.id.imgBottomLeft)
+    @BindView(R.id.imgBtnSettings)
     ImageButton mImgBottomLeft;
-    @BindView(R.id.imgBottomRight)
+    @BindView(R.id.imgBtnFavorites)
     ImageButton mImgBottomRight;
 
     public RecipeDetailsFragment() {
@@ -64,7 +63,7 @@ public class RecipeDetailsFragment extends Fragment {
     }
 
     @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBtnRecipeImageLeft,
-            R.id.imgBtnRecipeImageRight, R.id.imgBottomLeft, R.id.imgBottomRight})
+            R.id.imgBtnRecipeImageRight, R.id.imgBtnSettings, R.id.imgBtnFavorites})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgBtnGlobe:
@@ -75,9 +74,9 @@ public class RecipeDetailsFragment extends Fragment {
                 break;
             case R.id.imgBtnRecipeImageRight:
                 break;
-            case R.id.imgBottomLeft:
+            case R.id.imgBtnSettings:
                 break;
-            case R.id.imgBottomRight:
+            case R.id.imgBtnFavorites:
                 break;
         }
     }

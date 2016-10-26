@@ -11,23 +11,17 @@
 
     <ImageButton
         android:id="@+id/imgBtnFb"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/fb" />
+        android:background="@drawable/fb"
+        style="@style/social_button_w_n_h" />
 
     <ImageButton
         android:id="@+id/imgBtnTwitter"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/twitter" />
+        android:background="@drawable/twitter"
+        style="@style/social_button_w_n_h" />
 
     <ImageButton
         android:id="@+id/imgBtnGoogle"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/google_plus" />
+        android:background="@drawable/google_plus"
+        style="@style/social_button_w_n_h" />
 
 </LinearLayout>

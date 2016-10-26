@@ -32,7 +32,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/imgBtnGlobe"
         android:orientation="vertical"
-        android:layout_above="@+id/imgBottomLeft">
+        android:layout_above="@+id/imgBtnSettings">
 
 
         <ImageView
@@ -53,12 +53,12 @@
 
     <ImageButton style="@style/round_button_style.bottom"
         android:background="@drawable/left_arrow"
-        android:id="@+id/imgBottomLeft"
+        android:id="@+id/imgBtnSettings"
         android:layout_alignParentBottom="true"/>
 
     <ImageButton style="@style/round_button_style.bottom"
         android:background="@drawable/right_arrow"
-        android:id="@+id/imgBottomRight"
+        android:id="@+id/imgBtnFavorites"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 

@@ -32,7 +32,7 @@
         android:id="@+id/imageHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/imgBottomLeft"
+        android:layout_above="@+id/imgBtnSettings"
         android:layout_below="@+id/imgBtnGlobe"
         android:layout_marginBottom="30dp"
         android:orientation="horizontal"
@@ -100,8 +100,8 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/imgBottomRight"
-        android:layout_toRightOf="@+id/imgBottomLeft"
+        android:layout_toLeftOf="@+id/imgBtnFavorites"
+        android:layout_toRightOf="@+id/imgBtnSettings"
         android:background="@drawable/background_list_tools">
 
         <android.support.v7.widget.RecyclerView
@@ -118,13 +118,13 @@
 
 
     <ImageButton
-        android:id="@+id/imgBottomLeft"
+        android:id="@+id/imgBtnSettings"
         style="@style/round_button_style.bottom"
         android:layout_alignParentBottom="true"
         android:background="@drawable/left_arrow" />
 
     <ImageButton
-        android:id="@+id/imgBottomRight"
+        android:id="@+id/imgBtnFavorites"
         style="@style/round_button_style.bottom"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

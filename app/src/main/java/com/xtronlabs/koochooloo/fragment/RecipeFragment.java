@@ -35,9 +35,9 @@ public class RecipeFragment extends Fragment implements ProcessResponseInterface
     ImageButton mImgBtnSound;
     @BindView(R.id.recipeList)
     RecyclerView mRecipeList;
-    @BindView(R.id.imgBottomLeft)
+    @BindView(R.id.imgBtnSettings)
     ImageButton mImgBottomLeft;
-    @BindView(R.id.imgBottomRight)
+    @BindView(R.id.imgBtnFavorites)
     ImageButton mImgBottomRight;
     @BindView(R.id.lblSelectedCountry)
     TextView mLblSelectedCountry;
@@ -76,16 +76,16 @@ public class RecipeFragment extends Fragment implements ProcessResponseInterface
         return view;
     }
 
-    @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBottomLeft, R.id.imgBottomRight})
+    @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBtnSettings, R.id.imgBtnFavorites})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgBtnGlobe:
                 break;
             case R.id.imgBtnSound:
                 break;
-            case R.id.imgBottomLeft:
+            case R.id.imgBtnSettings:
                 break;
-            case R.id.imgBottomRight:
+            case R.id.imgBtnFavorites:
                 break;
         }
     }

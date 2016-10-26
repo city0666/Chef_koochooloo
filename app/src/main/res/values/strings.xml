@@ -2,4 +2,30 @@
     <string name="app_name">Koochooloo</string>
     <string name="welcome_to_chef_koochooloo">WELCOME TO \n CHEF KOOCHOOLOO</string>
     <string name="the_average_ecological_footprint_of_the_swiz_is">The average ecological footprint of the Swiss is 5gha. The ecological footprint is a way to describe how much water, food, transportation and energy people use, and how much waste they produce. That means that if everyone lived like the Swiss, we would need 3 planets to support us.</string>
+    <string name="key_pref_music_volume">45</string>
+
+
+    <string-array name="volume_values">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>65</item>
+        <item>70</item>
+        <item>75</item>
+        <item>80</item>
+        <item>85</item>
+        <item>90</item>
+        <item>95</item>
+        <item>100</item>
+    </string-array>
+
 </resources>

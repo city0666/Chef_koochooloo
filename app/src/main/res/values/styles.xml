@@ -38,4 +38,21 @@
         <item name="android:scrollbarDefaultDelayBeforeFade">1000</item>
     </style>
 
+    <style name="settings_label_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">-45dp</item>
+        <item name="android:layout_toRightOf">@+id/iconBg</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="social_button_w_n_h">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
 </resources>
