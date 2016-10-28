@@ -32,7 +32,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.RecipeDetailsActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustNothing"/>
         <activity
             android:name=".activity.FavoritesActivity"
             android:screenOrientation="landscape" />
