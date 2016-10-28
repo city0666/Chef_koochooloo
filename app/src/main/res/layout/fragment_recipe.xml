@@ -11,7 +11,7 @@
         style="@style/round_button_style.top"
         android:background="@drawable/icon_globe" />
 
-    <TextView
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:id="@+id/lblSelectedCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,11 +22,25 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+
+    <EditText
+        android:layout_width="250dp"
+        android:gravity="center"
+        android:hint="Search..."
+        android:textColor="@android:color/darker_gray"
+        android:textColorHint="@android:color/darker_gray"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imgBtnRecipeSearch"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/round_text_box_with_border"/>
+
     <ImageButton
-        android:id="@+id/imgBtnSound"
+        android:id="@+id/imgBtnRecipeSearch"
         style="@style/round_button_style.top"
         android:layout_alignParentRight="true"
-        android:background="@drawable/done_button" />
+        android:background="@drawable/icon_search" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipeList"
@@ -38,16 +52,10 @@
 
 
     <ImageButton
-        android:id="@+id/imgBtnSettings"
+        android:id="@+id/imgBtnRecipeListBack"
         style="@style/round_button_style.bottom"
         android:layout_alignParentBottom="true"
         android:background="@drawable/left_arrow" />
 
-    <ImageButton
-        android:id="@+id/imgBtnFavorites"
-        style="@style/round_button_style.bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/right_arrow" />
 
 </RelativeLayout>

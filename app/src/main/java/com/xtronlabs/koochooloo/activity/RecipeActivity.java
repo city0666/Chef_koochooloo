@@ -18,7 +18,7 @@ public class RecipeActivity extends BaseActivity {
         Intent callingIntent = getIntent();
         int countryId=0;
         if (callingIntent != null) countryId = callingIntent.getIntExtra(COUNTRY_ID,0);
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .add(R.id.mainContentHolder, RecipeFragment.newInstance(countryId))
                 .commit();
     }

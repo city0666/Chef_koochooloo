@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/customListHolder"
     android:minWidth="250dp"
+    android:visibility="gone"
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:layout_marginTop="62dp"

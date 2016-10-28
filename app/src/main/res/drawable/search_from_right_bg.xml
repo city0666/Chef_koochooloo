@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:width="300dp"
+        android:height="50dp"
+        android:drawable="@drawable/round_text_box_with_border"
+        android:gravity="center_vertical" />
+    <item
+        android:width="65dp"
+        android:height="65dp"
+        android:left="300dp"
+        android:drawable="@drawable/icon_search"
+        android:gravity="right" />
+
+</layer-list>

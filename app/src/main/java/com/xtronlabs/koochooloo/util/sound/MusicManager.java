@@ -61,7 +61,7 @@ public class MusicManager {
                 mp.start();
             }
         } else {
-            if (music == MUSIC_MENU) {
+            /*if (music == MUSIC_MENU) {
                 mp = MediaPlayer.create(context, R.raw.theme_song);
             } else if (music == MUSIC_GAME) {
                 mp = MediaPlayer.create(context, R.raw.theme_song);
@@ -70,7 +70,8 @@ public class MusicManager {
             } else {
                 Log.e(TAG, "unsupported music number - " + music);
                 return;
-            }
+            }*/
+            mp = MediaPlayer.create(context, R.raw.theme_song);
             players.put(music, mp);
             float volume = getMusicVolume(context);
             Log.d(TAG, "Setting music volume to " + volume);

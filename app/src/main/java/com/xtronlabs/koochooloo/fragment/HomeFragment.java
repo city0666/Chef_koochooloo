@@ -129,6 +129,12 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     Space mSpace;
     @BindView(R.id.contentLoadingProgress)
     ContentLoadingProgressBar mContentLoadingProgress;
+    @BindView(R.id.imgBtnSettingsMute)
+    ImageButton mImgBtnSettingsMute;
+
+    private AlertDialog mAllergensDialog;
+    private View mAllergensDialogView;
+    private ImageButton mBtnAllegensClose, mBtnAllergensOk;
 
     /*private ViewGroup mCustomListHolder;
     private RecyclerView mCustomListScrollView;
@@ -349,7 +355,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     }
 
     @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBtnSettings, R.id.imgBtnFavorites
-            , R.id.imgBtnCustomListClose, R.id.imgPopUpClose})
+            , R.id.imgBtnCustomListClose, R.id.imgPopUpClose, R.id.lblSettingsAllergens,
+            R.id.lblSettingsTutorial, R.id.lblSettingsSupport, R.id.lblSettingsAbout,R.id.imgBtnSettingsMute})
     public void onClick(View view) {
 
         if (isPopUpOpen) animatePopUpClose();
@@ -380,7 +387,54 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                     }
                 }, 600);
                 break;
+            case R.id.lblSettingsAllergens:
+                showAllergens();
+                break;
+            case R.id.lblSettingsTutorial:
+                break;
+            case R.id.lblSettingsSupport:
+                break;
+            case R.id.lblSettingsAbout:
+                break;
+            case R.id.imgBtnSettingsMute:
+                break;
         }
+    }
+
+    private void showAllergens(){
+        if (mAllergensDialogView == null){
+            mAllergensDialogView = getActivity()
+                    .getLayoutInflater()
+                    .inflate(R.layout.extra_allergens,null,false);
+            mBtnAllegensClose = (ImageButton) mAllergensDialogView.findViewById(R.id.imgBtnAllergensCancel);
+            mBtnAllergensOk = (ImageButton) mAllergensDialogView.findViewById(R.id.imgBtnAllergensOk);
+
+            mBtnAllergensOk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mAllergensDialog.dismiss();
+                }
+            });
+
+
+            mBtnAllegensClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mAllergensDialog.dismiss();
+                }
+            });
+
+        }
+
+        if (mAllergensDialog ==null){
+            mAllergensDialog = new AlertDialog.Builder(getActivity(), R.style.full_screen_dialog)
+                    .setView(mAllergensDialogView)
+                    .setCancelable(true)//todo change to false when you get the correct background
+                    .create();
+            mAllergensDialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getActivity()
+                    ,R.drawable.transparent_bg));
+        }
+        mAllergensDialog.show();
     }
 
     private void showCountryDetails() {
@@ -394,7 +448,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         startActivity(countryIntent);
     }
 
-    private void manageSound() {
+    @Override
+    protected void manageSound() {
         if (isSoundMuted) {
             mImgBtnSound.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_un_mute));
         } else {

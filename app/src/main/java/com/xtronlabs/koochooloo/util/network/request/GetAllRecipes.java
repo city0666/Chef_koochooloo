@@ -23,8 +23,6 @@ public class GetAllRecipes extends AbstractRequest implements Callback<RecipeIng
     public GetAllRecipes(Context mContext, ProcessResponseInterface<RecipeIngredient> responseHandler) {
         super(mContext);
         mResponseHandler = responseHandler;
-        Call<RecipeIngredient> getAllRecipeCall = mNetworkInterface.getRecipies();
-        getAllRecipeCall.enqueue(this);
     }
 
     @Override
