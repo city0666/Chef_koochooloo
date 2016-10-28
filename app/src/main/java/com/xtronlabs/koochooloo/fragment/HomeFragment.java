@@ -220,6 +220,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        mContentLoadingProgress.hide();
         return view;
     }
 

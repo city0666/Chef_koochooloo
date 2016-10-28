@@ -77,7 +77,6 @@
         android:scrollbars="vertical"
         android:text="Did you know that Swiss consumes the most honey in the world? Almost 75 tons per person per year, that is more than the matterhorn weights alltogether. Also there are no koolos in the country due to visa restrictions."
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#464545"
         app:customFont="font.ttf" />
 
 </RelativeLayout>

@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.xtronlabs.koochooloo.R;
 import com.xtronlabs.koochooloo.fragment.HomeFragment;
+import com.xtronlabs.koochooloo.util.sound.MusicManager;
 
 public class MainActivity extends BaseActivity {
 
@@ -32,4 +33,21 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (!continueMusic) {
+            MusicManager.pause();
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        continueMusic = false;
+        MusicManager.start(this, MusicManager.MUSIC_MENU);
+    }
+
+
 }

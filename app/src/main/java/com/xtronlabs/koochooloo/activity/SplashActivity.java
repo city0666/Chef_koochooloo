@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.xtronlabs.koochooloo.R;
+import com.xtronlabs.koochooloo.util.sound.MusicManager;
 
 public class SplashActivity extends BaseActivity {
 
@@ -22,5 +23,11 @@ public class SplashActivity extends BaseActivity {
             }
         },3000);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MusicManager.start(this,R.raw.theme_song);
     }
 }
