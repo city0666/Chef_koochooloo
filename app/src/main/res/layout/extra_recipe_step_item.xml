@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background_brown_9"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/check_mark_green" />
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        android:layout_marginLeft="8dp"
+        android:id="@+id/lblStepItem"
+        tools:text="Helooooooo"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <ImageButton
+        android:id="@+id/imgBtnGlobe"
+        style="@style/round_button_style.top"
+        android:background="@drawable/icon_globe" />
+
+    <com.xtronlabs.koochooloo.view.KoochoolooLabel
+        android:id="@+id/lblSelectedRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/imgBtnGlobe"
+        android:layout_marginTop="@dimen/our_activity_horizontal_margin"
+        android:layout_toEndOf="@+id/imgBtnGlobe"
+        android:layout_toRightOf="@+id/imgBtnGlobe"
+        android:textSize="20sp"
+        tools:text="Swiz Oats"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/imgBtnSound"
+        style="@style/round_button_style.top"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_un_mute" />
+
+
+
+    <ImageButton
+        android:id="@+id/imgBtnBack"
+        style="@style/round_button_style.bottom"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/left_arrow" />
+
+    <ImageButton
+        android:id="@+id/imgBtnForward"
+        style="@style/round_button_style.bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/right_arrow" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/imgBtnGlobe"
+        android:layout_toRightOf="@+id/imgBtnGlobe"
+        android:layout_toLeftOf="@+id/imgBtnForward"
+        android:padding="8dp"
+        android:id="@+id/lstRecipeSteps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</RelativeLayout>

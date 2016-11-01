@@ -19,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "time",
         "presentation",
         "updated_at",
-        "ingredients",
-        "images",
-        "steps"
+        "recipeIngredientNews",
+        "recipeImageNews",
+        "recipeStepNews"
 })
 public class Recipe2 {
 
@@ -35,11 +35,11 @@ public class Recipe2 {
     public String presentation;
     @JsonProperty("updated_at")
     public String updatedAt;
-    @JsonProperty("ingredients")
+    @JsonProperty("recipeIngredientNews")
     public List<Ingredient> ingredients = new ArrayList<Ingredient>();
-    @JsonProperty("images")
+    @JsonProperty("recipeImageNews")
     public List<Image> images = new ArrayList<Image>();
-    @JsonProperty("steps")
+    @JsonProperty("recipeStepNews")
     public List<Step> steps = new ArrayList<Step>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();

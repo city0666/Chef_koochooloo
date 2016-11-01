@@ -19,6 +19,9 @@ public class MusicManager {
     public static final int MUSIC_END_GAME = 2;
     private static final int PREF_DEFAULT_MUSIC_VOLUME_ITEM = 8;
 
+    private static boolean isPaused;
+
+
     private static HashMap players = new HashMap();
     private static int currentMusic = -1;
     private static int previousMusic = -1;
@@ -28,6 +31,10 @@ public class MusicManager {
         String volumeString = PreferenceManager.getDefaultSharedPreferences(context).getString(
                 context.getString(R.string.key_pref_music_volume), volumes[PREF_DEFAULT_MUSIC_VOLUME_ITEM]);
         return new Float(volumeString).floatValue();
+    }
+
+    public static boolean isPaused() {
+        return isPaused;
     }
 
     public static void start(Context context, int music) {
@@ -87,10 +94,12 @@ public class MusicManager {
                 }
             }
         }
+        isPaused = false;
     }
 
     public static void pause() {
         Collection mps = players.values();
+        isPaused = true;
         for (Object p : mps) {
             if (((MediaPlayer) p).isPlaying()) {
                 ((MediaPlayer) p).pause();

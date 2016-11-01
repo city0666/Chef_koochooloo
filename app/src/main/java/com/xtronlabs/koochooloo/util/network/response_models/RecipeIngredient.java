@@ -8,11 +8,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "ingredients"
+        "recipeIngredientNews"
 })
 public class RecipeIngredient {
 
-    @JsonProperty("ingredients")
+    @JsonProperty("recipeIngredientNews")
     public List<Ingredient_R> ingredients = new ArrayList<>();
 
 }

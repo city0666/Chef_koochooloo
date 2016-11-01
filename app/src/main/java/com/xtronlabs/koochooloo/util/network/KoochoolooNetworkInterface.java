@@ -9,6 +9,7 @@ import com.xtronlabs.koochooloo.util.network.response_models.Ingredient;
 import com.xtronlabs.koochooloo.util.network.response_models.Recipe;
 import com.xtronlabs.koochooloo.util.network.response_models.RecipeIngredient;
 import com.xtronlabs.koochooloo.util.network.response_models.Recipes;
+import com.xtronlabs.koochooloo.util.network.response_models.ResponseModelsNew.RecipeNew;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -37,13 +38,13 @@ public interface KoochoolooNetworkInterface {
 
     //@GET("recipes/{id}?lang=en&access_token=" + AT)
     @GET("recipesid.php")
-    Call<Recipe[]> getRecipeDetailsFor(@Query("id") int id);
+    Call<RecipeNew> getRecipeDetailsFor(@Query("id") int id);
 
-    //@GET("ingredients/?lang=en&access_token=" + AT)
-    @GET("ingredients.php")
+    //@GET("recipeIngredientNews/?lang=en&access_token=" + AT)
+    @GET("recipeIngredientNews.php")
     Call<Ingredient[]> getIngredients();
 
-    //@GET("ingredients/{id}?lang=en&access_token=" + AT)
-    @GET("ingredients.php")
+    //@GET("recipeIngredientNews/{id}?lang=en&access_token=" + AT)
+    @GET("recipeIngredientNews.php")
     Call<Ingredient[]> getIngredientAndTips(@Query("id") int id);
 }
