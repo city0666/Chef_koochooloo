@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/imgRecipeItemImage"
-        android:layout_width="145dp"
-        android:layout_height="140dp"
+        android:layout_width="135dp"
+        android:layout_height="120dp"
         android:layout_below="@+id/recipeItemTitle"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -20,7 +20,7 @@
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
         android:id="@+id/recipeItemTitle"
-        android:layout_width="165dp"
+        android:layout_width="155dp"
         android:layout_height="50dp"
         android:background="@drawable/parchment_title_dark"
         android:gravity="center"

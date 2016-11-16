@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -56,6 +57,7 @@ import com.xtronlabs.koochooloo.util.network.response_models.Countries;
 import com.xtronlabs.koochooloo.util.network.response_models.Country;
 import com.xtronlabs.koochooloo.util.network.response_models.Facts;
 import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
+import com.xtronlabs.koochooloo.util.sound.MusicManager;
 import com.xtronlabs.koochooloo.view.KoochoolooLabel;
 
 import org.json.JSONObject;
@@ -452,8 +454,10 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     protected void manageSound() {
         if (isSoundMuted) {
             mImgBtnSound.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_un_mute));
+            MusicManager.start(getActivity(),R.raw.theme_song);
         } else {
             mImgBtnSound.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_mute));
+            MusicManager.pause();
         }
         isSoundMuted = !isSoundMuted;
     }
@@ -634,6 +638,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             findCountryAndScrollToPosition(v.getText().toString());
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             return true;
         }
         return false;

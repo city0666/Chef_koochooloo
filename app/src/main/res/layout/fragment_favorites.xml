@@ -57,8 +57,15 @@
 
 
     <ImageButton style="@style/round_button_style.bottom"
+        android:id="@+id/btnFavBack"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/left_arrow"/>
+
+
+    <ImageButton style="@style/round_button_style.bottom"
         android:id="@+id/imgBtnSettings"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:background="@drawable/icon_settings"/>
 
 

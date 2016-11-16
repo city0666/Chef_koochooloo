@@ -25,11 +25,13 @@ import com.xtronlabs.koochooloo.activity.RecipeStepsActivity;
 import com.xtronlabs.koochooloo.adapter.IngredientListAdapter;
 import com.xtronlabs.koochooloo.util.network.request.GetRecipeDetailsForId;
 import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
+import com.xtronlabs.koochooloo.util.network.response_models.ResponseModelsNew.RecipeImageNew;
 import com.xtronlabs.koochooloo.util.network.response_models.ResponseModelsNew.RecipeNew;
 import com.xtronlabs.koochooloo.util.network.response_models.ResponseModelsNew.RecipeStepNew;
 import com.xtronlabs.koochooloo.util.sound.MusicManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,6 +67,8 @@ public class RecipeDetailsFragment extends Fragment implements ProcessResponseIn
     private String mTitle;
     private int mId;
     private ArrayList<RecipeStepNew> mRecipeSteps;
+    private List<RecipeImageNew> mImages;
+    private int index = 0;
 
     public RecipeDetailsFragment() {
     }
@@ -116,8 +120,10 @@ public class RecipeDetailsFragment extends Fragment implements ProcessResponseIn
             }
             break;
             case R.id.imgBtnRecipeImageLeft:
+                switchImage(true);
                 break;
             case R.id.imgBtnRecipeImageRight:
+                switchImage(false);
                 break;
             case R.id.imgBtnBack:
                 getActivity().onBackPressed();
@@ -140,9 +146,37 @@ public class RecipeDetailsFragment extends Fragment implements ProcessResponseIn
         IngredientListAdapter adapter = new IngredientListAdapter(response.recipe.recipeIngredients, getActivity());
         mIngredientsList.setAdapter(adapter);
         mIngredientsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mImages = response.recipe.recipeImages;
+        if (mImages == null) return;
+        index = 0;
+        switchImage(true);
+    }
+
+    private void switchImage(boolean goLeft) {
+        if (goLeft) {
+            if (index > 0) --index;
+        } else {
+            if (index < mImages.size() - 1) ++index;
+        }
+
+        if (index == 0) {
+            mImgBtnRecipeImageLeft.setEnabled(false);
+            mImgBtnRecipeImageLeft.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.arrow_left_disabled));
+        } else {
+            mImgBtnRecipeImageLeft.setEnabled(true);
+            mImgBtnRecipeImageLeft.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.arrow_left_enabled));
+        }
+
+        if (index == mImages.size() - 1) {
+            mImgBtnRecipeImageRight.setEnabled(false);
+            mImgBtnRecipeImageRight.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.arrow_right_disabled));
+        } else {
+            mImgBtnRecipeImageRight.setEnabled(true);
+            mImgBtnRecipeImageRight.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.arrow_right_enabled));
+        }
 
         Glide.with(getActivity())
-                .load(response.recipe.recipeImages.get(0))
+                .load(mImages.get(index).image)
                 .into(new SimpleTarget<GlideDrawable>() {
                     @Override
                     public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
@@ -150,6 +184,6 @@ public class RecipeDetailsFragment extends Fragment implements ProcessResponseIn
                     }
                 });
 
-
     }
+
 }

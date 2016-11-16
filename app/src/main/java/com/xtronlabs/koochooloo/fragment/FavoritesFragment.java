@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v4.widget.Space;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -79,6 +80,10 @@ public class FavoritesFragment extends Fragment implements ProcessResponseInterf
     RelativeLayout mLtSettingsContainer;
     @BindView(R.id.space)
     Space mSpace;
+    @BindView(R.id.btnFavBack)
+    ImageButton mBtnFavBack;
+    @BindView(R.id.contentLoadingProgress)
+    ContentLoadingProgressBar mContentLoadingProgress;
     private boolean isDrawerOpen;
     private boolean isPopUpOpen;
     private boolean isSettingsOpen;
@@ -199,7 +204,7 @@ public class FavoritesFragment extends Fragment implements ProcessResponseInterf
 
     @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSearch, R.id.imgBtnSettings, R.id.imgBtnCustomListClose,
             R.id.imgPopUpClose, R.id.imgBtnFb, R.id.imgBtnTwitter, R.id.imgBtnGoogle,
-            R.id.lblSettingsAllergens, R.id.lblSettingsTutorial, R.id.lblSettingsSupport,
+            R.id.lblSettingsAllergens, R.id.lblSettingsTutorial, R.id.lblSettingsSupport, R.id.btnFavBack,
             R.id.lblSettingsAbout})
     public void onClick(View view) {
 
@@ -242,6 +247,9 @@ public class FavoritesFragment extends Fragment implements ProcessResponseInterf
                 break;
             case R.id.lblSettingsAbout:
                 break;
+            case R.id.btnFavBack:
+                getActivity().onBackPressed();
+                break;
         }
     }
 
@@ -273,4 +281,7 @@ public class FavoritesFragment extends Fragment implements ProcessResponseInterf
     }
 
 
+    @OnClick()
+    public void onClick() {
+    }
 }

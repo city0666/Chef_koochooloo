@@ -46,7 +46,10 @@
         android:id="@+id/recipeList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/imgBtnGlobe"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@+id/imgBtnRecipeListBack"
         android:foregroundGravity="center_vertical"
         android:padding="@dimen/default_gap" />
 
