@@ -281,7 +281,4 @@ public class FavoritesFragment extends Fragment implements ProcessResponseInterf
     }
 
 
-    @OnClick()
-    public void onClick() {
-    }
 }
