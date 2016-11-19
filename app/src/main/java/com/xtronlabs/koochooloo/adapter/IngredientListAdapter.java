@@ -5,12 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.xtronlabs.koochooloo.R;
 import com.xtronlabs.koochooloo.util.network.response_models.ResponseModelsNew.RecipeIngredientNew;
 import com.xtronlabs.koochooloo.view.KoochoolooLabel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,7 +37,9 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
 
     @Override
     public int getItemCount() {
-        return mIngredients.size();
+        if (mIngredients == null || mIngredients.size() == 0)
+            Toast.makeText(mContext, "No ingredients available at this time", Toast.LENGTH_SHORT).show();
+        return mIngredients == null ? 0 : mIngredients.size();
     }
 
     class IngredientItemViewHolder extends RecyclerView.ViewHolder {
