@@ -444,7 +444,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         if (mCountry != null) countryId = mCountry.id;
         Intent countryIntent = new Intent(getActivity(), CountryDetailsActivity.class);
         countryIntent.putExtra(RecipeActivity.COUNTRY_ID, countryId);
-        countryIntent.putExtra(CountryDetailsActivity.COUNTRY_FLAG_LINK, mCountry.countryFlag);
+        countryIntent.putExtra(CountryDetailsActivity.COUNTRY_FLAG_LINK, mCountry.countryImage);
         countryIntent.putExtra(CountryDetailsActivity.COUNTRY_NAME, mCountry.name);
         M.log("cid", mCountry.id + "");
         startActivity(countryIntent);
