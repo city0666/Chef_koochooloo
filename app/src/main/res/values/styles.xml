@@ -63,4 +63,15 @@
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
 
+    <style name="recipe_radio_style">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:paddingTop">@dimen/default_gap</item>
+        <item name="android:paddingBottom">@dimen/default_gap</item>
+        <item name="android:background">@drawable/radio_bg</item>
+    </style>
+
 </resources>

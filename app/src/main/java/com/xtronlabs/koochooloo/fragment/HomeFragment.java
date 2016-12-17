@@ -81,8 +81,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     private static final String JSON_DIR = "country_json_50m";
     @BindView(R.id.imgBtnGlobe)
     ImageButton mImgBtnGlobe;
-    @BindView(R.id.imgBtnSound)
-    ImageButton mImgBtnSound;
+    @BindView(R.id.imgBtnSearch)
+    ImageButton mImgBtnSearch;
     @BindView(R.id.imgBtnSettings)
     ImageButton mImgBtnSettings;
     @BindView(R.id.imgBtnFavorites)
@@ -252,16 +252,12 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         mTxtSearch.setVisibility(View.GONE);
         GlobeController.Settings settings = new GlobeController.Settings();
         settings.useSurfaceView = false;
-        int color = ContextCompat.getColor(getActivity(), android.R.color.transparent);
-        settings.clearColor = color;
+        settings.clearColor = ContextCompat.getColor(getActivity(), android.R.color.transparent);
         mGlobeController = new GlobeController(getActivity(), settings);
         mGlobeController.gestureDelegate = mGestureDelegete;
         ViewGroup holder = (ViewGroup) view.findViewById(R.id.globeHolder);
         if (holder != null) {
             View globe = mGlobeController.getContentView();
-
-            int margin = (int) getResources().getDimension(R.dimen.activity_horizontal_margin);
-
             DisplayMetrics dm = getResources().getDisplayMetrics();
             int height = dm.heightPixels;
             int width = dm.widthPixels;
@@ -272,7 +268,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             globe.setLayoutParams(lp);
             globe.setPadding(8, 8, 8, 8);
             holder.addView(globe);
-            //globe.setRotation(100.0f);
+            mGlobeController.getGlobeView().animate();
         }
 
         mGlobeController.setZoomLimits(1.1f, 1.1f);
@@ -356,7 +352,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         return file;
     }
 
-    @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSound, R.id.imgBtnSettings, R.id.imgBtnFavorites
+    @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSearch, R.id.imgBtnSettings, R.id.imgBtnFavorites
             , R.id.imgBtnCustomListClose, R.id.imgPopUpClose, R.id.lblSettingsAllergens,
             R.id.lblSettingsTutorial, R.id.lblSettingsSupport, R.id.lblSettingsAbout,R.id.imgBtnSettingsMute})
     public void onClick(View view) {
@@ -368,8 +364,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             case R.id.imgBtnGlobe:
                 toggleDrawerAndSearch();
                 break;
-            case R.id.imgBtnSound:
-                manageSound();
+            case R.id.imgBtnSearch:
+                startActivity(new Intent(getActivity(), RecipeActivity.class));
                 break;
             case R.id.imgBtnSettings:
                 toggleSettings();
@@ -453,10 +449,10 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     @Override
     protected void manageSound() {
         if (isSoundMuted) {
-            mImgBtnSound.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_un_mute));
+            mImgBtnSearch.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_un_mute));
             MusicManager.start(getActivity(),R.raw.theme_song);
         } else {
-            mImgBtnSound.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_mute));
+            mImgBtnSearch.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_mute));
             MusicManager.pause();
         }
         isSoundMuted = !isSoundMuted;

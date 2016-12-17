@@ -42,8 +42,8 @@
         android:layout_alignStart="@+id/imgBtnGlobe"/>
 
     <ImageButton style="@style/round_button_style.top"
-        android:id="@+id/imgBtnSound"
-        android:background="@drawable/ic_un_mute"
+        android:id="@+id/imgBtnSearch"
+        android:background="@drawable/icon_search"
         android:layout_alignParentRight="true"/>
 
 

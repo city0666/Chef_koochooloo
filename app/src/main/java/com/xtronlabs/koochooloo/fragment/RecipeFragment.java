@@ -1,7 +1,6 @@
 package com.xtronlabs.koochooloo.fragment;
 
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +17,7 @@ import com.xtronlabs.koochooloo.R;
 import com.xtronlabs.koochooloo.activity.MainActivity;
 import com.xtronlabs.koochooloo.activity.RecipeActivity;
 import com.xtronlabs.koochooloo.adapter.RecipeListAdapter;
+import com.xtronlabs.koochooloo.util.network.request.GetAllRecipes;
 import com.xtronlabs.koochooloo.util.network.request.GetRecipesForCountryRequest;
 import com.xtronlabs.koochooloo.util.network.response_models.ProcessResponseInterface;
 import com.xtronlabs.koochooloo.util.network.response_models.Recipe;
@@ -61,8 +61,11 @@ public class RecipeFragment extends BaseFragment implements ProcessResponseInter
         Bundle b = getArguments();
         if (b != null) {
             int countryId = b.getInt(RecipeActivity.COUNTRY_ID, 0);
-            if (countryId <= 0) return;
-            new GetRecipesForCountryRequest(getActivity(), this, countryId);
+            if (countryId > 0)
+                new GetRecipesForCountryRequest(getActivity(), this, countryId);
+            else {
+                new GetAllRecipes(getActivity(), this);
+            }
         }
     }
 

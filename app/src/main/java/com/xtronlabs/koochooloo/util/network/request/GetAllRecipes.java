@@ -13,25 +13,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by Xtron005 on 30-07-2016.
- */
-public class GetAllRecipes extends AbstractRequest implements Callback<RecipeIngredient> {
+public class GetAllRecipes extends AbstractRequest implements Callback<Recipes> {
 
-    private ProcessResponseInterface<RecipeIngredient> mResponseHandler;
+    private ProcessResponseInterface<Recipes> mResponseHandler;
 
-    public GetAllRecipes(Context mContext, ProcessResponseInterface<RecipeIngredient> responseHandler) {
+    public GetAllRecipes(Context mContext, ProcessResponseInterface<Recipes> responseHandler) {
         super(mContext);
         mResponseHandler = responseHandler;
+        Call<Recipes> call = mNetworkInterface.getRecipies();
+        call.enqueue(this);
     }
 
     @Override
-    public void onResponse(Call<RecipeIngredient> call, Response<RecipeIngredient> response) {
+    public void onResponse(Call<Recipes> call, Response<Recipes> response) {
         mResponseHandler.processResponse(response.body());
     }
 
     @Override
-    public void onFailure(Call<RecipeIngredient> call, Throwable t) {
+    public void onFailure(Call<Recipes> call, Throwable t) {
         mResponseHandler.processResponse(null);
     }
 }

@@ -34,7 +34,7 @@ public interface KoochoolooNetworkInterface {
 
     //@GET("recipes?lang=en&access_token=" + AT)
     @GET("recipes.php")
-    Call<RecipeIngredient> getRecipies();
+    Call<Recipes> getRecipies();
 
     //@GET("recipes/{id}?lang=en&access_token=" + AT)
     @GET("recipesid.php")

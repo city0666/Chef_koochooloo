@@ -18,7 +18,7 @@
         android:layout_alignTop="@+id/imgBtnGlobe"
         android:layout_marginTop="@dimen/our_activity_horizontal_margin"
         android:layout_centerHorizontal="true"
-        android:text="RECIPES"
+        android:text="ALL RECIPES"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -42,14 +42,66 @@
         android:layout_alignParentRight="true"
         android:background="@drawable/icon_search" />
 
+    <ScrollView
+        android:id="@+id/recipeTypeList"
+        android:layout_width="300dp"
+        android:layout_marginLeft="@dimen/default_gap"
+        android:padding="@dimen/default_gap"
+        android:layout_below="@+id/imgBtnGlobe"
+        android:layout_above="@+id/imgBtnRecipeListBack"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:padding="@dimen/default_gap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <com.xtronlabs.koochooloo.view.KoochoolooCheckBox
+                android:text="Vegetarian"
+                style="@style/recipe_radio_style" />
+
+
+            <com.xtronlabs.koochooloo.view.KoochoolooCheckBox
+                android:text="Dairy Free"
+                style="@style/recipe_radio_style" />
+
+            <com.xtronlabs.koochooloo.view.KoochoolooCheckBox
+                android:text="Gluten Free"
+                style="@style/recipe_radio_style" />
+
+            <com.xtronlabs.koochooloo.view.KoochoolooCheckBox
+                android:text="Appetizers"
+                style="@style/recipe_radio_style" />
+
+            <com.xtronlabs.koochooloo.view.KoochoolooCheckBox
+                android:text="Breakfast"
+                style="@style/recipe_radio_style" />
+
+            <com.xtronlabs.koochooloo.view.KoochoolooCheckBox
+                android:text="Main Course"
+                style="@style/recipe_radio_style" />
+
+            <com.xtronlabs.koochooloo.view.KoochoolooCheckBox
+                android:text="Dessert"
+                style="@style/recipe_radio_style" />
+
+
+
+        </RadioGroup>
+
+    </ScrollView>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipeList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/recipeTypeList"
+        android:layout_height="match_parent"
         android:layout_below="@+id/imgBtnGlobe"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_above="@+id/imgBtnRecipeListBack"
+        android:layout_marginBottom="@dimen/default_gap_double"
         android:foregroundGravity="center_vertical"
         android:padding="@dimen/default_gap" />
 
