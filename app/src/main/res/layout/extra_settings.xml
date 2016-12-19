@@ -10,7 +10,7 @@
     <View
         android:id="@+id/iconBg"
         android:layout_width="50dp"
-        android:layout_height="260dp"
+        android:layout_height="225dp"
         android:background="@drawable/settings_bg" />
 
     <com.xtronlabs.koochooloo.view.KoochoolooLabel
@@ -41,15 +41,7 @@
         android:text="About"
         style="@style/settings_label_style" />
 
-    <ImageButton
-        android:id="@+id/imgBtnSettingsMute"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/lblSettingsAbout"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="@dimen/default_gap"
-        android:background="@drawable/ic_home_settings_mute" />
+
 
 
 </RelativeLayout>

@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_list_tools"
+        android:background="@drawable/background_brown"
         android:padding="@dimen/our_activity_horizontal_margin"
         android:layout_above="@+id/separator">
         <ScrollView

@@ -4,10 +4,15 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:id="@+id/ltSocialMediaContainer"
-    android:visibility="gone"
     android:layout_marginBottom="@dimen/default_gap"
+    android:visibility="gone"
     android:orientation="horizontal"
     android:padding="@dimen/default_gap">
+
+    <ImageButton
+        android:id="@+id/imgBtnSettingsMute"
+        style="@style/social_button_w_n_h"
+        android:background="@drawable/ic_un_mute" />
 
     <ImageButton
         android:id="@+id/imgBtnFb"

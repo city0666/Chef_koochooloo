@@ -270,7 +270,6 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             holder.addView(globe);
             mGlobeController.getGlobeView().animate();
         }
-
         mGlobeController.setZoomLimits(1.1f, 1.1f);
         ViewGroup parent = (ViewGroup) mImgBtnGlobe.getParent();
         int index = parent.indexOfChild(mCustomListHolder);
@@ -287,6 +286,8 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         parent.bringChildToFront(parent.getChildAt(index));
         //mGlobeController.getGlobeView().currentMapScale(0.9f, 0.9f);
         //mGlobeController.setZoomLimits(0.5f, 0.5f);
+
+        new LoadAllCountriesAsync().execute();
 
         if (mTxtSearch != null) {
             mTxtSearch.setOnEditorActionListener(this);
@@ -354,7 +355,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
 
     @OnClick({R.id.imgBtnGlobe, R.id.imgBtnSearch, R.id.imgBtnSettings, R.id.imgBtnFavorites
             , R.id.imgBtnCustomListClose, R.id.imgPopUpClose, R.id.lblSettingsAllergens,
-            R.id.lblSettingsTutorial, R.id.lblSettingsSupport, R.id.lblSettingsAbout,R.id.imgBtnSettingsMute})
+            R.id.lblSettingsTutorial, R.id.lblSettingsSupport, R.id.lblSettingsAbout, R.id.imgBtnSettingsMute})
     public void onClick(View view) {
 
         if (isPopUpOpen) animatePopUpClose();
@@ -395,15 +396,16 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             case R.id.lblSettingsAbout:
                 break;
             case R.id.imgBtnSettingsMute:
+                manageSound();
                 break;
         }
     }
 
-    private void showAllergens(){
-        if (mAllergensDialogView == null){
+    private void showAllergens() {
+        if (mAllergensDialogView == null) {
             mAllergensDialogView = getActivity()
                     .getLayoutInflater()
-                    .inflate(R.layout.extra_allergens,null,false);
+                    .inflate(R.layout.extra_allergens, null, false);
             mBtnAllegensClose = (ImageButton) mAllergensDialogView.findViewById(R.id.imgBtnAllergensCancel);
             mBtnAllergensOk = (ImageButton) mAllergensDialogView.findViewById(R.id.imgBtnAllergensOk);
 
@@ -424,20 +426,21 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
 
         }
 
-        if (mAllergensDialog ==null){
+        if (mAllergensDialog == null) {
             mAllergensDialog = new AlertDialog.Builder(getActivity(), R.style.full_screen_dialog)
                     .setView(mAllergensDialogView)
                     .setCancelable(true)//todo change to false when you get the correct background
                     .create();
             mAllergensDialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getActivity()
-                    ,R.drawable.transparent_bg));
+                    , R.drawable.transparent_bg));
         }
         mAllergensDialog.show();
     }
 
     private void showCountryDetails() {
         int countryId = 0;
-        if (mCountry != null) countryId = mCountry.id;
+        if (mCountry == null) return;
+        countryId = mCountry.id;
         Intent countryIntent = new Intent(getActivity(), CountryDetailsActivity.class);
         countryIntent.putExtra(RecipeActivity.COUNTRY_ID, countryId);
         countryIntent.putExtra(CountryDetailsActivity.COUNTRY_FLAG_LINK, mCountry.countryImage);
@@ -449,10 +452,10 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     @Override
     protected void manageSound() {
         if (isSoundMuted) {
-            mImgBtnSearch.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_un_mute));
-            MusicManager.start(getActivity(),R.raw.theme_song);
+            mImgBtnSettingsMute.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_un_mute));
+            MusicManager.start(getActivity(), R.raw.theme_song);
         } else {
-            mImgBtnSearch.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_mute));
+            mImgBtnSettingsMute.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_mute));
             MusicManager.pause();
         }
         isSoundMuted = !isSoundMuted;
@@ -695,7 +698,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
         protected void onPostExecute(VectorObject vectorObject) {
             super.onPostExecute(vectorObject);
             AttrDictionary x = vectorObject.getAttributes();
-            vectorInfo.setLineWidth(3f);
+            vectorInfo.setLineWidth(5f);
             vectorObject.selectable = true;
             mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
             LabelInfo labelInfo = new LabelInfo();
@@ -711,6 +714,51 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             String name = x.getString("ADMIN");
             screenLabel.text = name == null ? "NO name" : name;
             mGlobeController.addScreenLabel(screenLabel, labelInfo, MaplyBaseController.ThreadMode.ThreadAny);
+        }
+    }
+
+    private class LoadAllCountriesAsync extends AsyncTask<Void, VectorObject, Void> {
+
+        VectorInfo vectorInfo = new VectorInfo();
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if (android.os.Debug.isDebuggerConnected()) android.os.Debug.waitForDebugger();
+            try {
+                String[] files = getActivity().getAssets().list(JSON_DIR);
+                if (files == null) {
+                    M.log("Get assets : ", " is null");
+                    return null;
+                }
+                for (String s : files) {
+                    InputStream is = getActivity().getAssets().open(JSON_DIR + "/" + s);
+                    int size = is.available();
+                    byte[] contents = new byte[size];
+                    is.read(contents);
+                    String json = new String(contents, "UTF-8");
+                    if (json != null) {
+                        VectorObject vectorObject = new VectorObject();
+                        vectorObject.fromGeoJSON(json);
+                        vectorObject.selectable = true;
+                        publishProgress(vectorObject);
+                    }
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onProgressUpdate(VectorObject... values) {
+            VectorObject vectorObject = values[0];
+            vectorInfo.setLineWidth(2f);
+            vectorInfo.setColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+            vectorObject.selectable = true;
+            mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
         }
     }
 

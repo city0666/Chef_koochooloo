@@ -29,18 +29,27 @@
         android:layout_alignParentRight="true"
         android:background="@drawable/done_button" />
 
-    <ImageView
-        android:id="@+id/imgCountryDetailsCountryImage"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/imgBtnCountryDetailsBack"
         android:layout_below="@+id/imgBtnGlobe"
-        android:layout_marginLeft="@dimen/our_activity_horizontal_margin"
-        android:layout_marginRight="@dimen/our_activity_horizontal_margin"
         android:background="@drawable/picture_frame"
-        android:padding="30dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/swiss" />
+        android:paddingLeft="@dimen/default_gap"
+        android:paddingRight="@dimen/default_gap">
+
+        <ImageView
+            android:id="@+id/imgCountryDetailsCountryImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/default_gap_double"
+            android:layout_marginRight="@dimen/default_gap_double"
+            android:layout_marginTop="@dimen/default_gap"
+            android:padding="30dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/swiss" />
+    </FrameLayout>
+
 
     <ImageButton
         android:id="@+id/imgBtnCountryDetailsBack"
@@ -64,12 +73,12 @@
         android:layout_marginBottom="@dimen/our_activity_horizontal_margin"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:maxLines="3"
         android:layout_toLeftOf="@+id/imgBtnCountryDetailsForward"
         android:layout_toRightOf="@+id/imgBtnCountryDetailsBack"
         android:background="@drawable/bcakground_wide"
         android:gravity="center"
         android:maxHeight="50dp"
+        android:maxLines="3"
         android:paddingBottom="@dimen/our_activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin_half"
         android:paddingRight="@dimen/activity_horizontal_margin_half"
