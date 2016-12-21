@@ -42,6 +42,7 @@ public class CountryDetailsActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (!KoochoolooApp.playMusic) return;
         continueMusic = true;
         MusicManager.start(this, R.raw.theme_song);
     }
@@ -49,8 +50,10 @@ public class CountryDetailsActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (!continueMusic)
+        if (!continueMusic) {
             MusicManager.pause();
+            KoochoolooApp.playMusic = false;
+        }
     }
 
 

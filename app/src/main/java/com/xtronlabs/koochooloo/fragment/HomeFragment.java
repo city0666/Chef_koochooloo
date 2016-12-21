@@ -1,7 +1,6 @@
 package com.xtronlabs.koochooloo.fragment;
 
 import android.animation.ObjectAnimator;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
@@ -147,6 +146,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     private boolean isSettingsOpen;
     private boolean isSoundMuted;
 
+    LabelInfo labelInfo ;
 
     private CountryListAdapter mCountryListAdapter;
 
@@ -156,6 +156,17 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 @Override
                 public void userDidSelect(GlobeController globeController, SelectedObject[] selectedObjects,
                                           Point2d point2d, Point2d point2d1) {
+                    M.log("touched", "On globe");
+                    ScreenLabel screenLabel = new ScreenLabel();
+                    try {
+                        VectorObject vectorObject = ((VectorObject) selectedObjects[0].selObj);
+                        screenLabel.loc = vectorObject.centroid();
+                        String name = vectorObject.getAttributes().getString("ADMIN");
+                        screenLabel.text = name == null ? "NO NAME" : name;
+                        mGlobeController.addScreenLabel(screenLabel, labelInfo, MaplyBaseController.ThreadMode.ThreadAny);
+                    } catch (Exception e) {
+                        //ignore for now
+                    }
                     hideDrawerAndPopUp();
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -241,7 +252,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final ProgressDialog pd = new ProgressDialog(getActivity());
+        /*final ProgressDialog pd = new ProgressDialog(getActivity());
         pd.setIndeterminate(true);
         pd.setMessage("Please wait...");
         pd.setCancelable(false);
@@ -253,7 +264,7 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 pd.dismiss();
             }
         }, 5000);
-
+        */
         mTxtSearch.setVisibility(View.GONE);
         GlobeController.Settings settings = new GlobeController.Settings();
         settings.useSurfaceView = false;
@@ -275,6 +286,10 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             holder.addView(globe);
         }
         mGlobeController.setZoomLimits(1.1f, 1.1f);
+        mGlobeController.setKeepNorthUp(true);
+        labelInfo = new LabelInfo();
+        labelInfo.setFontSize(50f);
+        labelInfo.setTextColor(R.color.colorPrimary);
         ViewGroup parent = (ViewGroup) mImgBtnGlobe.getParent();
         int index = parent.indexOfChild(mCustomListHolder);
         parent.bringChildToFront(parent.getChildAt(index));
@@ -705,19 +720,14 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             vectorInfo.setLineWidth(5f);
             vectorObject.selectable = true;
             mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
-            LabelInfo labelInfo = new LabelInfo();
-            labelInfo.setFontSize(35f);
-            labelInfo.setTextColor(R.color.colorPrimary);
-
-            //need to add animate to position geo
-            //insufficient documentation / no reference code
-            //Need to go through the IOS source code for the logic(only hope to get it right)
-
             ScreenLabel screenLabel = new ScreenLabel();
             screenLabel.loc = vectorObject.centroid();
             String name = x.getString("ADMIN");
             screenLabel.text = name == null ? "NO name" : name;
             mGlobeController.addScreenLabel(screenLabel, labelInfo, MaplyBaseController.ThreadMode.ThreadAny);
+            //overrides the zoom limits when called
+            //mGlobeController.animatePositionGeo(vectorObject.centroid().getX(), vectorObject.centroid().getY(), 0, 1);
+            //mGlobeController.setPositionGeo(vectorObject.centroid().getX(), vectorObject.centroid().getY(), 0);
         }
     }
 
