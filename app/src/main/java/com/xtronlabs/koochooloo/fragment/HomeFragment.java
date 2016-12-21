@@ -171,6 +171,11 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
                 }
 
                 @Override
+                public void userDidTapOutside(GlobeController globeController, Point2d point2d) {
+                    hideDrawerAndPopUp();
+                }
+
+                @Override
                 public void userDidLongPress(GlobeController globeController, SelectedObject[] selectedObjects,
                                              Point2d point2d, Point2d point2d1) {
                 }
@@ -268,7 +273,6 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             globe.setLayoutParams(lp);
             globe.setPadding(8, 8, 8, 8);
             holder.addView(globe);
-            mGlobeController.getGlobeView().animate();
         }
         mGlobeController.setZoomLimits(1.1f, 1.1f);
         ViewGroup parent = (ViewGroup) mImgBtnGlobe.getParent();
@@ -759,6 +763,14 @@ public class HomeFragment extends BaseFragment implements ProcessResponseInterfa
             vectorInfo.setColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
             vectorObject.selectable = true;
             mGlobeController.addVector(vectorObject, vectorInfo, MaplyBaseController.ThreadMode.ThreadAny);
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            mGlobeController.setAutoRotate(1.0f, 10.0f);
         }
     }
 

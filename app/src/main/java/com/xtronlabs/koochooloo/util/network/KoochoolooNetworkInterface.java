@@ -41,10 +41,10 @@ public interface KoochoolooNetworkInterface {
     Call<RecipeNew> getRecipeDetailsFor(@Query("id") int id);
 
     //@GET("recipeIngredientNews/?lang=en&access_token=" + AT)
-    @GET("recipeIngredientNews.php")
+    @GET("recipeIngredient.php")
     Call<Ingredient[]> getIngredients();
 
     //@GET("recipeIngredientNews/{id}?lang=en&access_token=" + AT)
-    @GET("recipeIngredientNews.php")
+    @GET("recipeIngredient.php")
     Call<Ingredient[]> getIngredientAndTips(@Query("id") int id);
 }
